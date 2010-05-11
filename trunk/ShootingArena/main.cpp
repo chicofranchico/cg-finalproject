@@ -3,15 +3,10 @@
 */
 
 #include "ShootingDemo.h"
-#include "GlutStuff.h"
+#include "GlutStuffs.h"
 #include "GLDebugDrawer.h"
 #include "btBulletDynamicsCommon.h"
 
-/*#ifdef __DEBUG_FPU_ISSUES
-#define _GNU_SOURCE
-#include <fenv.h>
-#endif
-*/
 
 GLDebugDrawer	gDebugDrawer;
 
