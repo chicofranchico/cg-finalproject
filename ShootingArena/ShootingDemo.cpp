@@ -15,7 +15,7 @@ Based on Bullet demo suit
 #include <stdio.h> //printf debugging
 
 #include "ShootingDemo.h"
-#include "GL_ShapeDrawer.h"
+#include "ShapeDrawer.h"
 
 #include "GlutStuff.h"
 
@@ -181,7 +181,12 @@ int ShootingDemo::createMovingTarget(btScalar scale,btScalar mass,
 		float length=hiSliderLimit-lowerSliderLimit;
 		float width=box.m_max[1]-box.m_min[1];
 		mov.setValue(0,mov[1]-.25,0);
-        createShelf(length/2,0.2,width/2, sliderWorldPos+mov,angle,0.f);		                  
+	    btVector3 final_pos=sliderWorldPos+mov;
+        createShelf(length/2,0.2,width/2,final_pos ,angle,0.f);	
+        // Sound - not really good
+//        sounder.setSourcePosition(-final_pos[0],final_pos[1],final_pos[2]);
+//        sounder.playSound(BELT);        
+        	                  
 		return    movingTargets.size()-1;
 		               
 }
@@ -192,6 +197,8 @@ void ShootingDemo::eraseSlider(btSliderConstraint * slider)
   		m_dynamicsWorld->removeConstraint((btTypedConstraint*)slider);
 //        printf("Erased\n");
 		movingTargets.remove(slider);
+// Experimental not really working as desired
+        sounder.stopSound(BELT);        
 		
 }
 
@@ -333,7 +340,8 @@ void ShootingDemo::clientMoveAndDisplay()
                    eraseSlider(moving);
 
                 eraseBullet(btRigidBody::upcast(obB));
-                printf("Boom!!\n");
+                //printf("Boom!!\n");
+                sounder.setSourcePosition(-ptB[0],ptB[1],ptB[2]);
                 sounder.playSound(BOOM);
              }
             else if (isBullet(obA))
@@ -545,7 +553,7 @@ void ShootingDemo::setShootBoxShape ()
 void ShootingDemo::shootBox(const btVector3& destination)
 {
 
-    m_ShootBoxInitialSpeed=90.f;
+    m_ShootBoxInitialSpeed=70.f;
 	if (m_dynamicsWorld)
 	{
 		float mass = 1.f;
@@ -572,6 +580,9 @@ void ShootingDemo::shootBox(const btVector3& destination)
 		body->setCcdMotionThreshold(1.);
 		body->setCcdSweptSphereRadius(0.2f);
 		
+        sounder.setSourcePosition(-camPos[0],camPos[1],camPos[2]);
+        sounder.playSound(BANG);
+
 	}
 }
 

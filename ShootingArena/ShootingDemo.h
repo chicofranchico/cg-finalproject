@@ -5,7 +5,7 @@
 #ifndef SHOOTING_DEMO_H
 #define SHOOTING_DEMO_H
 
-#include "GlutDemoApplication.h"
+#include "GlutApplication.h"
 #include "LinearMath/btAlignedObjectArray.h"
 
 #include "soundClass.hpp"
@@ -24,7 +24,7 @@ class btGImpactMeshShape;
 class btCollisionObject;
 
 ///ShootingDemo shows basic stacking using Bullet physics, and allows toggle of Ccd (using key '1')
-class ShootingDemo : public GlutDemoApplication
+class ShootingDemo : public GlutApplication
 {
 	//keep the collision shapes, for deletion/cleanup
 	btAlignedObjectArray<btCollisionShape*>	m_collisionShapes;
@@ -66,7 +66,7 @@ public:
     
     void initGImpactCollision();
 
-	static DemoApplication* Create()
+	static Application* Create()
 	{
 		ShootingDemo* demo = new ShootingDemo;
 		demo->myinit();

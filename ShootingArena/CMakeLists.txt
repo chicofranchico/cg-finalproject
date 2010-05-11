@@ -31,7 +31,8 @@ ${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL
 )
 
 INCLUDE_DIRECTORIES(
-${BULLET_PHYSICS_SOURCE_DIR}/src ${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL 
+${BULLET_PHYSICS_SOURCE_DIR}/src 
+${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL 
 )
 
 LINK_LIBRARIES(
@@ -45,6 +46,14 @@ ADD_EXECUTABLE(AppShootingDemo
 		ShootingDemo.h
 		soundClass.hpp
 		soundClass.cpp
+		Application.h
+		Application.cpp
+		GlutApplication.h
+		GlutApplication.cpp
+		ShapeDrawer.h
+		ShapeDrawer.cpp
+		GlutStuffs.h
+		GlutStuffs.cpp
 	)
 
 SET_TARGET_PROPERTIES(AppShootingDemo PROPERTIES  DEBUG_POSTFIX "_Debug")
