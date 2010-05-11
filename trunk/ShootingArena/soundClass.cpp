@@ -1,6 +1,5 @@
 /**
  * soundClass.cpp
- * Modified form a previous project
  * By JuanPi Carbajal carbajal@ifi.uzh.ch
  * 05.2010
  */
@@ -20,23 +19,25 @@ ALfloat listenerOrientation[] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
 
 SoundClass::SoundClass()
 {
-    if(!alureInitDevice(NULL, NULL))
+    if (!alutInit (NULL, NULL))
     {
-        fprintf(stderr, "Failed to open OpenAL device: %s\n", alureGetErrorString());
+      ALenum error = alutGetError ();
+      fprintf (stderr, "%s\n", alutGetErrorString (error));
+      exit (EXIT_FAILURE);
     }
-
+    
     if(alGetError() != AL_NO_ERROR)
     {
         fprintf(stderr, "Failed to create OpenAL source!\n");
-        alureShutdownDevice();
+        alutExit ();
     }
 
     alGenSources(NUM_SOURCES, srcc);
 
-    buff[START] = alureCreateBufferFromFile("ambient.wav");
-    buff[BOOM] = alureCreateBufferFromFile("a.wav");
-    buff[CRASH] = alureCreateBufferFromFile("weap.wav");
-    buff[BANG] = alureCreateBufferFromFile("shot2.wav");
+    buff[START] = alutCreateBufferFromFile("ambient.wav");
+    buff[BOOM] = alutCreateBufferFromFile("a.wav");
+    buff[CRASH] = alutCreateBufferFromFile("weap.wav");
+    buff[BANG] = alutCreateBufferFromFile("shot2.wav");
 
     alListenerfv(AL_POSITION, listenerPosition);
 
@@ -71,15 +72,15 @@ SoundClass::SoundClass()
     if(alGetError() != AL_NO_ERROR)
     {
         fprintf(stderr, "Failed to create OpenAL source!\n");
-        alureShutdownDevice();
+        alutExit ();
     }
 
-    alSourcePlay(srcc[START]);
+ //   alSourcePlay(srcc[START]);
 }
 
 SoundClass::~SoundClass()
 {
-
+   deleteData();
 }
 void SoundClass::playSound(int x)
 {
@@ -147,7 +148,6 @@ void SoundClass::deleteData()
     alDeleteBuffers(NUM_BUFFERS, buff);
 
 
-    alureShutdownDevice();
+    alutExit ();
 
 }
-

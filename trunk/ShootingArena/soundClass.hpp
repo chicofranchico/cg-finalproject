@@ -1,6 +1,5 @@
 /**
  * soundClass.hpp
- * Modified form a previous project
  * By JuanPi Carbajal carbajal@ifi.uzh.ch
  * 05.2010
  */
@@ -12,7 +11,7 @@
 #include <stdlib.h>
 
 
-#include <AL/alure.h>
+#include <AL/alut.h>
 
 
 #define NUM_BUFFERS 6
