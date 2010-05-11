@@ -334,6 +334,7 @@ void ShootingDemo::clientMoveAndDisplay()
 
                 eraseBullet(btRigidBody::upcast(obB));
                 printf("Boom!!\n");
+                sounder.playSound(BOOM);
              }
             else if (isBullet(obA))
              {
