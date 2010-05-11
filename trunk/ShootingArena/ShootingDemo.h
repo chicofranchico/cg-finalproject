@@ -8,6 +8,7 @@
 #include "GlutDemoApplication.h"
 #include "LinearMath/btAlignedObjectArray.h"
 
+#include "soundClass.hpp"
 
 
 class btBroadphaseInterface;
@@ -126,10 +127,12 @@ public:
     // Shape for pyramids elements
     btCollisionShape* pyramidShape;
     
-    
     // Starts and end of conveyor belts
     btAlignedObjectArray<btVector3> conveyorStart;
     btAlignedObjectArray<btVector3> conveyorEnd;
+    
+    // Sound synthetizer
+    SoundClass sounder;
 };
 
 #endif //SHOOTING_DEMO_H
