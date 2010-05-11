@@ -32,12 +32,11 @@ ${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL
 
 INCLUDE_DIRECTORIES(
 ${BULLET_PHYSICS_SOURCE_DIR}/src ${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL 
-../alure
 )
 
 LINK_LIBRARIES(
 	OpenGLSupport  
-BulletDynamics  BulletCollision LinearMath  glut 
+BulletDynamics  BulletCollision LinearMath  glut alut
 	)
 
 ADD_EXECUTABLE(AppShootingDemo
@@ -48,7 +47,7 @@ ADD_EXECUTABLE(AppShootingDemo
 		soundClass.cpp
 	)
 
-#SET_TARGET_PROPERTIES(AppShootingDemo PROPERTIES  DEBUG_POSTFIX "_Debug")
+SET_TARGET_PROPERTIES(AppShootingDemo PROPERTIES  DEBUG_POSTFIX "_Debug")
 SET_TARGET_PROPERTIES(AppShootingDemo PROPERTIES  MINSIZEREL_POSTFIX "_MinsizeRel")
 SET_TARGET_PROPERTIES(AppShootingDemo PROPERTIES  RELWITHDEBINFO_POSTFIX "_RelWithDebugInfo")
 
