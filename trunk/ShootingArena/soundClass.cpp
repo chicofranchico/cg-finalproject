@@ -61,6 +61,7 @@ SoundClass::SoundClass()
       exit (EXIT_FAILURE);
     }    
 
+/*
     buff[CRASH] = alutCreateBufferFromFile("weap.wav");
     if (buff[CRASH] == AL_NONE)
     {
@@ -70,7 +71,7 @@ SoundClass::SoundClass()
       alutExit ();
       exit (EXIT_FAILURE);
     }    
-
+*/
     buff[BANG] = alutCreateBufferFromFile("bang.wav");
     if (buff[BANG] == AL_NONE)
     {
