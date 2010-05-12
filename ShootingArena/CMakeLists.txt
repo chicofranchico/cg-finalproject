@@ -54,6 +54,10 @@ ADD_EXECUTABLE(AppShootingDemo
 		ShapeDrawer.cpp
 		GlutStuffs.h
 		GlutStuffs.cpp
+		tga.h
+		tga.c
+		material.hpp
+		material.cpp
 	)
 
 SET_TARGET_PROPERTIES(AppShootingDemo PROPERTIES  DEBUG_POSTFIX "_Debug")

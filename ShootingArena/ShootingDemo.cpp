@@ -21,6 +21,8 @@ Based on Bullet demo suit
 
 #include "BunnyMesh.h"
 
+#include "material.hpp"
+
 static float gCollisionMargin = 0.05f;
 extern float eye[3];
 
@@ -56,7 +58,8 @@ void ShootingDemo::createShelf(float xSpan,float ySpan, float zSpan,
 
      btCollisionShape* shape = new btBoxShape(btVector3(xSpan,ySpan,zSpan));//floor
 	 btRigidBody* body = localCreateRigidBody(0.f,trans,shape);
-
+     obj_id.insert ( std::pair<btRigidBody*,int>(body,ShootingDemo::table) );
+    
      body->setCollisionFlags(body->getCollisionFlags()|btCollisionObject::CF_STATIC_OBJECT);
 }	            
 	            
@@ -88,6 +91,7 @@ void ShootingDemo::createPyramid(btCollisionShape* shape, float halfElemSize, bt
 
 			btRigidBody* body = 0;
 			body = localCreateRigidBody(elemMass,trans,shape);
+	        obj_id.insert ( std::pair<btRigidBody*,int>(body,ShootingDemo::can) );
 
 		}
 	}
@@ -147,7 +151,9 @@ int ShootingDemo::createMovingTarget(btScalar scale,btScalar mass,
         btSliderConstraint* spSlider6Dof = NULL;
 
 		d6body0 = localCreateRigidBody( mass,trans,bunny);
-            
+		
+        obj_id.insert ( std::pair<btRigidBody*,int>(d6body0,ShootingDemo::bunny) );         
+        
 //		d6body0->setActivationState(DISABLE_DEACTIVATION);
 
 		btRigidBody* fixedBody1 = localCreateRigidBody(0,trans,0);
@@ -183,6 +189,7 @@ int ShootingDemo::createMovingTarget(btScalar scale,btScalar mass,
 		mov.setValue(0,mov[1]-.25,0);
 	    btVector3 final_pos=sliderWorldPos+mov;
         createShelf(length/2,0.2,width/2,final_pos ,angle,0.f);	
+        
         // Sound - not really good
 //        sounder.setSourcePosition(-final_pos[0],final_pos[1],final_pos[2]);
 //        sounder.playSound(BELT);        
@@ -209,6 +216,8 @@ void ShootingDemo::eraseBullet(btRigidBody * obj)
 			delete obj->getMotionState();
 		}
 		bullets.remove(obj);
+		obj_id.erase(obj);
+		
 		m_dynamicsWorld->removeCollisionObject( obj );
 		delete obj;
 }
@@ -224,30 +233,34 @@ void ShootingDemo::createScenario()
 	btCollisionShape* staticboxShape3 = new btBoxShape(btVector3(.1,arenaHeight,arenaDepth));//right wall
 	btCollisionShape* staticboxShape4 = new btBoxShape(btVector3(arenaWidth,arenaHeight,.1));//back wall
     btCollisionShape* staticboxShape5 = new btBoxShape(btVector3(arenaWidth,.1,arenaDepth));//ceiling
-	
-	btCompoundShape* staticScenario = new btCompoundShape();//static scenario
 
-	startTransform.setOrigin(btVector3(0,-arenaHeight,arenaDepth));
-	staticScenario->addChildShape(startTransform,staticboxShape1);
-	startTransform.setOrigin(btVector3(-arenaWidth,0.f,arenaDepth));
-	staticScenario->addChildShape(startTransform,staticboxShape2);
-	startTransform.setOrigin(btVector3(arenaWidth,0.f,arenaDepth));
-	staticScenario->addChildShape(startTransform,staticboxShape3);
-	startTransform.setOrigin(btVector3(0.f,0.f,arenaDepth));
-	staticScenario->addChildShape(startTransform,staticboxShape4);
-	startTransform.setOrigin(btVector3(0.f,arenaHeight,arenaDepth));
-	staticScenario->addChildShape(startTransform,staticboxShape5);
+// Floor
+	startTransform.setOrigin(btVector3(0,-arenaHeight,arenaDepth)+m_cameraTargetPosition);
+    btRigidBody* staticBody = localCreateRigidBody(mass, startTransform,staticboxShape1);
+   	staticBody->setCollisionFlags(staticBody->getCollisionFlags()|btCollisionObject::CF_STATIC_OBJECT);
+    obj_id.insert ( std::pair<btRigidBody*,int>(staticBody,ShootingDemo::ground) );     	
+//Walls
+	startTransform.setOrigin(btVector3(-arenaWidth,0.f,arenaDepth)+m_cameraTargetPosition);
+    staticBody = localCreateRigidBody(mass, startTransform,staticboxShape2);
+   	staticBody->setCollisionFlags(staticBody->getCollisionFlags()|btCollisionObject::CF_STATIC_OBJECT);
+    obj_id.insert ( std::pair<btRigidBody*,int>(staticBody,ShootingDemo::wall) );     	
 
-	startTransform.setOrigin(m_cameraTargetPosition);
+	startTransform.setOrigin(btVector3(arenaWidth,0.f,arenaDepth)+m_cameraTargetPosition);
+    staticBody = localCreateRigidBody(mass, startTransform,staticboxShape3);
+   	staticBody->setCollisionFlags(staticBody->getCollisionFlags()|btCollisionObject::CF_STATIC_OBJECT);
+    obj_id.insert ( std::pair<btRigidBody*,int>(staticBody,ShootingDemo::wall) );     	
 
-	btRigidBody* staticBody = localCreateRigidBody(mass, startTransform,staticScenario);
+	startTransform.setOrigin(btVector3(0.f,0.f,arenaDepth)+m_cameraTargetPosition);
+    staticBody = localCreateRigidBody(mass, startTransform,staticboxShape4);
+   	staticBody->setCollisionFlags(staticBody->getCollisionFlags()|btCollisionObject::CF_STATIC_OBJECT);
+    obj_id.insert ( std::pair<btRigidBody*,int>(staticBody,ShootingDemo::wall) );     	
 
-	staticBody->setCollisionFlags(staticBody->getCollisionFlags()|btCollisionObject::CF_STATIC_OBJECT);
-	
-    // Position of shelfs with pyramids
-    // Shlefs on the back corners
-   // shelfPosition.push_back();
-
+// Ceiling
+	startTransform.setOrigin(btVector3(0.f,arenaHeight,arenaDepth)+m_cameraTargetPosition);
+    staticBody = localCreateRigidBody(mass, startTransform,staticboxShape5);
+   	staticBody->setCollisionFlags(staticBody->getCollisionFlags()|btCollisionObject::CF_STATIC_OBJECT);
+    obj_id.insert ( std::pair<btRigidBody*,int>(staticBody,ShootingDemo::roof) );     	
+    
 }
 ////////////////////////////////////
 
@@ -340,7 +353,7 @@ void ShootingDemo::clientMoveAndDisplay()
                    eraseSlider(moving);
 
                 eraseBullet(btRigidBody::upcast(obB));
-                //printf("Boom!!\n");
+
                 sounder.setSourcePosition(-ptB[0],ptB[1],ptB[2]);
                 sounder.playSound(BOOM);
              }
@@ -406,24 +419,26 @@ void	ShootingDemo::setupEmptyDynamicsWorld()
    // Configure Fixed parameters
    
    // Members related to the arena
-   arenaDepth = 40.f;
+   arenaDepth = 45.f;
    arenaWidth = 20.f;
-   arenaHeight = 10.f;
+   arenaHeight = 15.f;
    
    // Sun direction
-   m_sundirection.setValue(1000,-800,1000);
+   m_sundirection.setValue(1000,-400,1000);
 
    //Camera Position
    setCameraDistance(2.f);
    setCameraTargetPosition(0.f,15.f,0.f);
-   
+ 
+   // bullet Speed
+   m_ShootBoxInitialSpeed=40.f;  
 }
 
 
 void	ShootingDemo::initPhysics()
 {
 	setTexturing(true);
-	setShadows(true);
+	setShadows(false);
 
 	setupEmptyDynamicsWorld();
 	
@@ -436,7 +451,7 @@ void	ShootingDemo::initPhysics()
 	
 	// Pyramids
 	m_collisionShapes.push_back(new btCylinderShape (btVector3(CUBE_HALF_EXTENTS,CUBE_HALF_EXTENTS,CUBE_HALF_EXTENTS)));
-	m_collisionShapes.push_back(new btBoxShape (btVector3(BIG_CUBE_HALF_EXTENTS,BIG_CUBE_HALF_EXTENTS,BIG_CUBE_HALF_EXTENTS)));
+	m_collisionShapes.push_back(new btCylinderShape (btVector3(BIG_CUBE_HALF_EXTENTS,BIG_CUBE_HALF_EXTENTS,BIG_CUBE_HALF_EXTENTS)));
 	
 	// On the Left wall
 	btVector3 pos(arenaWidth-2.f*CUBE_HALF_EXTENTS,0.f,1.5*arenaDepth/2.f);
@@ -553,7 +568,6 @@ void ShootingDemo::setShootBoxShape ()
 void ShootingDemo::shootBox(const btVector3& destination)
 {
 
-    m_ShootBoxInitialSpeed=70.f;
 	if (m_dynamicsWorld)
 	{
 		float mass = 1.f;
@@ -566,6 +580,7 @@ void ShootingDemo::shootBox(const btVector3& destination)
 
 		btRigidBody* body = this->localCreateRigidBody(mass, startTransform,m_shootBoxShape);
         bullets.push_back(body);
+        obj_id.insert ( std::pair<btRigidBody*,int>(body,ShootingDemo::ball) );   
         
 		body->setLinearFactor(btVector3(1,1,1));
 
@@ -582,7 +597,7 @@ void ShootingDemo::shootBox(const btVector3& destination)
 		
         sounder.setSourcePosition(-camPos[0],camPos[1],camPos[2]);
         sounder.playSound(BANG);
-
+        
 	}
 }
 
@@ -615,7 +630,41 @@ void ShootingDemo::myinit(void)
 	glDepthFunc(GL_LESS);
 
 	glClearColor(btScalar(0.7),btScalar(0.7),btScalar(0.7),btScalar(0));
+	
+	m_shapeDrawer->m_textureFile[ball]="test.tga";
+	m_shapeDrawer->m_texturescale[ball]=1.f;
+	Material mat;
+    mat.setDiffuse(Color(1.f,1.0f,0.5f));
+    m_shapeDrawer->m_materials[ball]=mat;
+    
+	m_shapeDrawer->m_textureFile[roof]="test.tga";
+	m_shapeDrawer->m_texturescale[roof]=1.f;
+    m_shapeDrawer->m_materials[roof]=mat;
 
+	m_shapeDrawer->m_textureFile[wall]="woodwalltex.tga";
+	m_shapeDrawer->m_texturescale[wall]=0.08f;	
+	m_shapeDrawer->m_texturerot[wall]=btVector3(90,0,0);                	
+    m_shapeDrawer->m_materials[wall]=mat;
+
+    m_shapeDrawer->m_textureFile[ground]="rockgroundtex.tga";    
+   	m_shapeDrawer->m_texturescale[ground]=0.05f;
+    m_shapeDrawer->m_materials[ground]=mat;
+
+    m_shapeDrawer->m_textureFile[can]="Soupcan.tga";
+   	m_shapeDrawer->m_texturescale[can]=0.8f;    
+	m_shapeDrawer->m_texturerot[can]=btVector3(90,0,0); 
+    m_shapeDrawer->m_materials[can]=mat;
+
+    m_shapeDrawer->m_textureFile[table]="test.tga";
+   	m_shapeDrawer->m_texturescale[table]=0.3f;    
+	m_shapeDrawer->m_texturerot[table]=btVector3(0,0,45);                	   	
+    m_shapeDrawer->m_materials[table]=mat;
+
+	m_shapeDrawer->m_textureFile[bunny]="bunnytex.tga";
+    m_shapeDrawer->m_materials[bunny]=mat;
+   	m_shapeDrawer->m_texturescale[bunny]=0.025f;  	
+	m_shapeDrawer->m_texturerot[bunny]=btVector3(0,0,90);                	
+	
 	//  glEnable(GL_CULL_FACE);
 	//  glCullFace(GL_BACK);
 }

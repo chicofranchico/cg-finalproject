@@ -19,7 +19,7 @@ subject to the following restrictions:
 static Application* gApplication = 0;
 
 
-#include "GlutStuff.h"
+#include "GlutStuffs.h"
 
 static	void glutKeyboardCallback(unsigned char key, int x, int y)
 {

@@ -23,7 +23,7 @@ subject to the following restrictions:
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-
+#include <map>
 
 #include "LinearMath/btVector3.h"
 #include "LinearMath/btMatrix3x3.h"
@@ -40,7 +40,7 @@ class	btTypedConstraint;
 
 class Application
 {
-	void	displayProfileString(int xOffset,int yStart,char* message);
+	
 	class CProfileIterator* m_profileIterator;
 
 	protected:
@@ -50,9 +50,6 @@ class Application
 
 	///this is the most important class
 	btDynamicsWorld*		m_dynamicsWorld;
-
-	///constraint for mouse picking
-	btTypedConstraint*		m_pickConstraint;
 
 	btCollisionShape*	m_shootBoxShape;
 
@@ -67,8 +64,13 @@ class Application
 	int	m_mouseOldX;
 	int	m_mouseOldY;
 	int	m_mouseButtons;
+	
 public:
 	int	m_modifierKeys;
+
+    std::map<btRigidBody*,int>  obj_id;
+    
+    void	displayProfileString(int xOffset,int yStart,char* message);
 protected:
 
 	float m_scaleBottom;

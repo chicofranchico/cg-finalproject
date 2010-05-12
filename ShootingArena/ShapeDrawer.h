@@ -6,12 +6,21 @@
 #ifndef SHAPE_DRAWER_H
 #define SHAPE_DRAWER_H
 
+//#include <cmath>
+//#include <iostream>
+//#include <fstream>
+
 class btCollisionShape;
 class btShapeHull;
 #include "LinearMath/btAlignedObjectArray.h"
 #include "LinearMath/btVector3.h"
 
 #include "BulletCollision/CollisionShapes/btShapeHull.h"
+
+#include <map>
+#include <string>
+#include "tga.h"
+#include "material.hpp"
 
 /// OpenGL shape drawing
 class  ShapeDrawer
@@ -28,22 +37,29 @@ protected:
 	//clean-up memory of dynamically created shape hulls
 	
 	btAlignedObjectArray<ShapeCache*>	m_shapecaches;
-	unsigned int						m_texturehandle;
-	bool								m_textureenabled;
-	bool								m_textureinitialized;
+ 
+    std::map<int,unsigned int>	        m_texturehandle;
+    bool            					m_textureenabled;
+	std::map<int,bool>					m_textureinitialized;
+	
 	
 
 	ShapeCache*							cache(btConvexShape*);
 
 public:
+       // Textures
+        std::map<int,std::string>         m_textureFile;
+        std::map<int,float>	            m_texturescale;
+        std::map<int,btVector3>	        m_texturerot;                
+        std::map<int,Material>            m_materials;
 		 ShapeDrawer();
 
 		virtual ~ ShapeDrawer();
 
 		///drawOpenGL might allocate temporary memoty, stores pointer in shape userpointer
 		virtual void drawOpenGL(btScalar* m, const btCollisionShape* shape, 
-		const btVector3& color,int	debugMode,const btVector3& worldBoundsMin,
-		const btVector3& worldBoundsMax);
+                                int	debugMode,const btVector3& worldBoundsMin,
+		const btVector3& worldBoundsMax, const int obj_id);
 		virtual void drawShadow(btScalar* m, const btVector3& extrusion,
 		const btCollisionShape* shape,const btVector3& worldBoundsMin,
 		const btVector3& worldBoundsMax);
@@ -58,6 +74,7 @@ public:
 		void			drawSphere(btScalar r, int lats, int longs);
 		static void		drawCoordSystem();
 		
+		GLbyte* gltLoadTGA(const char *szFileName, GLint *iWidth, GLint *iHeight, GLint *iComponents, GLenum *eFormat);
 };
 
 void OGL_displaylist_register_shape(btCollisionShape * shape);

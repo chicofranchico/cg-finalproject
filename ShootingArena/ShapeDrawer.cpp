@@ -44,135 +44,6 @@ subject to the following restrictions:
 
 #include <stdio.h> //printf debugging
 
-//#define USE_DISPLAY_LISTS 1
-#ifdef USE_DISPLAY_LISTS
-
-#include <map>
-
-using namespace std;
-
-//Set for storing Display list per trimesh
-struct TRIMESH_KEY
-{
-	btCollisionShape* m_shape;
-	GLuint m_dlist;//OpenGL display list	
-};
-
-typedef map<unsigned long,TRIMESH_KEY> TRIMESH_KEY_MAP;
-
-typedef pair<unsigned long,TRIMESH_KEY> TRIMESH_KEY_PAIR;
-
-TRIMESH_KEY_MAP g_display_lists;
-
-class GlDisplaylistDrawcallback : public btTriangleCallback
-{
-public:
-
-	virtual void processTriangle(btVector3* triangle,int partId, int triangleIndex)
-	{
-
-		btVector3 diff1 = triangle[1] - triangle[0];
-		btVector3 diff2 = triangle[2] - triangle[0];
-		btVector3 normal = diff1.cross(diff2);
-
-		normal.normalize();
-
-		glBegin(GL_TRIANGLES);
-		glColor3f(1, 1, 1);
-		glNormal3d(normal.getX(),normal.getY(),normal.getZ());
-		glVertex3d(triangle[0].getX(), triangle[0].getY(), triangle[0].getZ());
-
-		//glColor3f(0, 1, 0);
-		glNormal3d(normal.getX(),normal.getY(),normal.getZ());
-		glVertex3d(triangle[1].getX(), triangle[1].getY(), triangle[1].getZ());
-
-		//glColor3f(0, 1, 0);
-		glNormal3d(normal.getX(),normal.getY(),normal.getZ());
-		glVertex3d(triangle[2].getX(), triangle[2].getY(), triangle[2].getZ());
-		glEnd();
-
-	/*	glBegin(GL_LINES);
-		glColor3f(1, 1, 0);
-		glNormal3d(normal.getX(),normal.getY(),normal.getZ());
-		glVertex3d(triangle[0].getX(), triangle[0].getY(), triangle[0].getZ());
-		glNormal3d(normal.getX(),normal.getY(),normal.getZ());
-		glVertex3d(triangle[1].getX(), triangle[1].getY(), triangle[1].getZ());
-		glColor3f(1, 1, 0);
-		glNormal3d(normal.getX(),normal.getY(),normal.getZ());
-		glVertex3d(triangle[2].getX(), triangle[2].getY(), triangle[2].getZ());
-		glNormal3d(normal.getX(),normal.getY(),normal.getZ());
-		glVertex3d(triangle[1].getX(), triangle[1].getY(), triangle[1].getZ());
-		glColor3f(1, 1, 0);
-		glNormal3d(normal.getX(),normal.getY(),normal.getZ());
-		glVertex3d(triangle[2].getX(), triangle[2].getY(), triangle[2].getZ());
-		glNormal3d(normal.getX(),normal.getY(),normal.getZ());
-		glVertex3d(triangle[0].getX(), triangle[0].getY(), triangle[0].getZ());
-		glEnd();*/
-	}
-};
-
-GLuint  OGL_get_displaylist_for_shape(btCollisionShape * shape)
-{
-	TRIMESH_KEY_MAP::iterator map_iter;
-
-	unsigned long key = (unsigned long)shape;
-	map_iter = g_display_lists.find(key);
-	if(map_iter!=g_display_lists.end())
-	{
-		return map_iter->second.m_dlist;
-	}
-
-	return 0;
-}
-
-void OGL_displaylist_clean()
-{
-	TRIMESH_KEY_MAP::iterator map_iter,map_itend;
-
-	map_iter = g_display_lists.begin();
-
-	while(map_iter!=map_itend)
-	{
-		glDeleteLists(map_iter->second.m_dlist,1);		
-		map_iter++;
-	}
-
-	g_display_lists.clear();
-}
-
-
-void OGL_displaylist_register_shape(btCollisionShape * shape)
-{
-	btVector3 aabbMax(btScalar(BT_LARGE_FLOAT),btScalar(BT_LARGE_FLOAT),btScalar(BT_LARGE_FLOAT));
-	btVector3 aabbMin(-btScalar(BT_LARGE_FLOAT),-btScalar(BT_LARGE_FLOAT),-btScalar(BT_LARGE_FLOAT));
-	GlDisplaylistDrawcallback drawCallback;
-	TRIMESH_KEY dlist;
-
-	dlist.m_dlist = glGenLists(1);
-	dlist.m_shape = shape;
-
-	unsigned long key = (unsigned long)shape;
-
-	g_display_lists.insert(TRIMESH_KEY_PAIR(key,dlist));
-
-	glNewList(dlist.m_dlist,GL_COMPILE);
-
-//	glEnable(GL_CULL_FACE);
-
-	glCullFace(GL_BACK);
-
-	if (shape->isConcave())
-	{
-		btConcaveShape* concaveMesh = (btConcaveShape*) shape;			
-		//todo pass camera, for some culling		
-		concaveMesh->processAllTriangles(&drawCallback,aabbMin,aabbMax);
-	}
-
-//	glDisable(GL_CULL_FACE);	
-
-	glEndList();
-}
-#endif //USE_DISPLAY_LISTS
 
 void  ShapeDrawer::drawCoordSystem()  {
 	glBegin(GL_LINES);
@@ -188,10 +59,6 @@ void  ShapeDrawer::drawCoordSystem()  {
 	glEnd();
 
 }
-
-
-
-
 
 class GlDrawcallback : public btTriangleCallback
 {
@@ -228,16 +95,21 @@ public:
 		} else
 		{
 			glBegin(GL_TRIANGLES);
-			//glColor3f(1, 1, 1);
-			
-			
-			glVertex3d(triangle[0].getX(), triangle[0].getY(), triangle[0].getZ());
-			glVertex3d(triangle[1].getX(), triangle[1].getY(), triangle[1].getZ());
-			glVertex3d(triangle[2].getX(), triangle[2].getY(), triangle[2].getZ());
+    		btVector3 diff1 = triangle[1] - triangle[0];
+    		btVector3 diff2 = triangle[2] - triangle[0];
+    		btVector3 normal = diff1.cross(diff2);
 
-			glVertex3d(triangle[2].getX(), triangle[2].getY(), triangle[2].getZ());
-			glVertex3d(triangle[1].getX(), triangle[1].getY(), triangle[1].getZ());
-			glVertex3d(triangle[0].getX(), triangle[0].getY(), triangle[0].getZ());
+    		normal.normalize();
+
+    		glNormal3d(normal.getX(),normal.getY(),normal.getZ());
+    		glVertex3d(triangle[0].getX(), triangle[0].getY(), triangle[0].getZ());
+    		glVertex3d(triangle[1].getX(), triangle[1].getY(), triangle[1].getZ());
+    		glVertex3d(triangle[2].getX(), triangle[2].getY(), triangle[2].getZ());
+
+    		glVertex3d(triangle[2].getX(), triangle[2].getY(), triangle[2].getZ());
+    		glVertex3d(triangle[1].getX(), triangle[1].getY(), triangle[1].getZ());
+    		glVertex3d(triangle[0].getX(), triangle[0].getY(), triangle[0].getZ());
+
 			glEnd();
 		}
 	}
@@ -296,7 +168,6 @@ void  ShapeDrawer::drawSphere(btScalar radius, int lats, int longs)
 void  ShapeDrawer::drawCylinder(float radius,float halfHeight, int upAxis)
 {
 
-
 	glPushMatrix();
 	switch (upAxis)
 	{
@@ -339,7 +210,7 @@ void  ShapeDrawer::drawCylinder(float radius,float halfHeight, int upAxis)
 	gluDeleteQuadric(quadObj);
 }
 
- ShapeDrawer::ShapeCache*		 ShapeDrawer::cache(btConvexShape* shape)
+ ShapeDrawer::ShapeCache*	ShapeDrawer::cache(btConvexShape* shape)
 {
 	ShapeCache*		sc=(ShapeCache*)shape->getUserPointer();
 	if(!sc)
@@ -395,174 +266,88 @@ void renderSquareA(float x, float y, float z)
 inline void glDrawVector(const btVector3& v) { glVertex3d(v[0], v[1], v[2]); }
 
 
-void  ShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, const btVector3& color,int	debugMode,const btVector3& worldBoundsMin,const btVector3& worldBoundsMax)
+void  ShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, 
+    int	debugMode,const btVector3& worldBoundsMin,
+    const btVector3& worldBoundsMax, const int obj_id)
 {
+
 	
-	if (shape->getShapeType() == CUSTOM_CONVEX_SHAPE_TYPE)
-	{
-		btVector3 org(m[12], m[13], m[14]);
-		btVector3 dx(m[0], m[1], m[2]);
-		btVector3 dy(m[4], m[5], m[6]);
-//		btVector3 dz(m[8], m[9], m[10]);
-		const btBoxShape* boxShape = static_cast<const btBoxShape*>(shape);
-		btVector3 halfExtent = boxShape->getHalfExtentsWithMargin();
-		dx *= halfExtent[0];
-		dy *= halfExtent[1];
-//		dz *= halfExtent[2];
-		glColor3f(1,1,1);
-		glDisable(GL_LIGHTING);
-		glLineWidth(2);
-
-		glBegin(GL_LINE_LOOP);
-		glDrawVector(org - dx - dy);
-		glDrawVector(org - dx + dy);
-		glDrawVector(org + dx + dy);
-		glDrawVector(org + dx - dy);
-		glEnd();
-		return;
-	} 
-	else if((shape->getShapeType() == BOX_SHAPE_PROXYTYPE) && (debugMode & btIDebugDraw::DBG_FastWireframe))
-	{
-		btVector3 org(m[12], m[13], m[14]);
-		btVector3 dx(m[0], m[1], m[2]);
-		btVector3 dy(m[4], m[5], m[6]);
-		btVector3 dz(m[8], m[9], m[10]);
-		const btBoxShape* boxShape = static_cast<const btBoxShape*>(shape);
-		btVector3 halfExtent = boxShape->getHalfExtentsWithMargin();
-		dx *= halfExtent[0];
-		dy *= halfExtent[1];
-		dz *= halfExtent[2];
-		glBegin(GL_LINE_LOOP);
-		glDrawVector(org - dx - dy - dz);
-		glDrawVector(org + dx - dy - dz);
-		glDrawVector(org + dx + dy - dz);
-		glDrawVector(org - dx + dy - dz);
-		glDrawVector(org - dx + dy + dz);
-		glDrawVector(org + dx + dy + dz);
-		glDrawVector(org + dx - dy + dz);
-		glDrawVector(org - dx - dy + dz);
-		glEnd();
-		glBegin(GL_LINES);
-		glDrawVector(org + dx - dy - dz);
-		glDrawVector(org + dx - dy + dz);
-		glDrawVector(org + dx + dy - dz);
-		glDrawVector(org + dx + dy + dz);
-		glDrawVector(org - dx - dy - dz);
-		glDrawVector(org - dx + dy - dz);
-		glDrawVector(org - dx - dy + dz);
-		glDrawVector(org - dx + dy + dz);
-		glEnd();
-		return;
-	}
-
 	glPushMatrix(); 
 	btglMultMatrix(m);
 
-
-	if (shape->getShapeType() == UNIFORM_SCALING_SHAPE_PROXYTYPE)
-	{
-		const btUniformScalingShape* scalingShape = static_cast<const btUniformScalingShape*>(shape);
-		const btConvexShape* convexShape = scalingShape->getChildShape();
-		float	scalingFactor = (float)scalingShape->getUniformScalingFactor();
+	// Initialize the textures
+	if(m_textureenabled && (!m_textureinitialized[obj_id]) )
 		{
-			btScalar tmpScaling[4][4]={{scalingFactor,0,0,0},
-			{0,scalingFactor,0,0},
-			{0,0,scalingFactor,0},
-			{0,0,0,1}};
+			
+			// Here look for the texture arrays.
+			printf("Loading Texture %s for Object %d\n",m_textureFile[obj_id].c_str(), obj_id);
+			gl_texture_t *tga_tex = NULL;
 
-			drawOpenGL( (btScalar*)tmpScaling,convexShape,color,debugMode,worldBoundsMin,worldBoundsMax);
-		}
-		glPopMatrix();
-		return;
-	}
+            m_texturehandle[obj_id] = 0;
 
-	if (shape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE)
-	{
-		const btCompoundShape* compoundShape = static_cast<const btCompoundShape*>(shape);
-		for (int i=compoundShape->getNumChildShapes()-1;i>=0;i--)
-		{
-			btTransform childTrans = compoundShape->getChildTransform(i);
-			const btCollisionShape* colShape = compoundShape->getChildShape(i);
-			btScalar childMat[16];
-			childTrans.getOpenGLMatrix(childMat);
-			drawOpenGL(childMat,colShape,color,debugMode,worldBoundsMin,worldBoundsMax);
-		}
-
-	} else
-	{
-		if(m_textureenabled && (!m_textureinitialized) )
-		{
-			GLubyte*	image=new GLubyte[256*256*3];
-			for(int y=0;y<256;++y)
-			{
-				const int	t=y>>4;
-				GLubyte*	pi=image+y*256*3;
-				for(int x=0;x<256;++x)
-				{
-					const int		s=x>>4;
-					const GLubyte	b=180;					
-					GLubyte			c=b+((s+t&1)&1)*(255-b);
-					pi[0]=pi[1]=pi[2]=c;pi+=3;
-				}
-			}
-
-			glGenTextures(1,(GLuint*)&m_texturehandle);
-			glBindTexture(GL_TEXTURE_2D,m_texturehandle);
+            tga_tex = ReadTGAFile (m_textureFile[obj_id].c_str());    
+                                    
+    		glGenTextures(1,(GLuint*)&m_texturehandle[obj_id]);
+			glBindTexture(GL_TEXTURE_2D,m_texturehandle[obj_id]);
 			glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
+
+        	//filter modes
 			glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 			glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR_MIPMAP_LINEAR);
 			glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
 			glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
-			gluBuild2DMipmaps(GL_TEXTURE_2D,3,256,256,GL_RGB,GL_UNSIGNED_BYTE,image);
-			delete[] image;
-	
-			
+
+            printf("Read Texture %d x %d\n",tga_tex->width,tga_tex->height);
+   		    gluBuild2DMipmaps(GL_TEXTURE_2D, tga_tex->internalFormat,
+			 tga_tex->width, tga_tex->height,
+			 tga_tex->format, GL_UNSIGNED_BYTE, tga_tex->texels);
+
+
+			free (tga_tex->texels);
+            free (tga_tex);
+
 		}
 
+		// Transform the textures
 		glMatrixMode(GL_TEXTURE);
 		glLoadIdentity();
-		glScalef(0.025f,0.025f,0.025f);
+		glScalef(m_texturescale[obj_id],m_texturescale[obj_id],m_texturescale[obj_id]);
+		glRotatef(m_texturerot[obj_id][0],1,0,0);
+    	glRotatef(m_texturerot[obj_id][1],0,1,0);
+		glRotatef(m_texturerot[obj_id][2],0,0,1);    	
 		glMatrixMode(GL_MODELVIEW);
 
 		static const GLfloat	planex[]={1,0,0,0};
-		//	static const GLfloat	planey[]={0,1,0,0};
-			static const GLfloat	planez[]={0,0,1,0};
+		static const GLfloat	planey[]={0,1,0,0};
+		static const GLfloat	planez[]={0,0,1,0};
 			glTexGenfv(GL_S,GL_OBJECT_PLANE,planex);
 			glTexGenfv(GL_T,GL_OBJECT_PLANE,planez);
+			glTexGenfv(GL_R,GL_OBJECT_PLANE,planey);
+						
 			glTexGeni(GL_S,GL_TEXTURE_GEN_MODE,GL_OBJECT_LINEAR);
 			glTexGeni(GL_T,GL_TEXTURE_GEN_MODE,GL_OBJECT_LINEAR);
+			glTexGeni(GL_R,GL_TEXTURE_GEN_MODE,GL_OBJECT_LINEAR);			
 			glEnable(GL_TEXTURE_GEN_S);
 			glEnable(GL_TEXTURE_GEN_T);
 			glEnable(GL_TEXTURE_GEN_R);
-			m_textureinitialized=true;
-
-		
-			
-
-		//drawCoordSystem();
-
-		//glPushMatrix();
-		glEnable(GL_COLOR_MATERIAL);
+			m_textureinitialized[obj_id]=true;
+	
 		if(m_textureenabled) 
 		{
 			glEnable(GL_TEXTURE_2D);
-			glBindTexture(GL_TEXTURE_2D,m_texturehandle);
+			glBindTexture(GL_TEXTURE_2D,m_texturehandle[obj_id]);
 		} else
 		{
-			glDisable(GL_TEXTURE_2D);
-		}
-
-
-		glColor3f(color.x(),color.y(), color.z());		
-
+    		glDisable(GL_TEXTURE_2D);
+    	}
+   		glEnable(GL_COLOR_MATERIAL);
+      	Color diff = m_materials[obj_id].getDiffuse();
+        glColor3f(diff.r,diff.g,diff.b);
+        	
 		bool useWireframeFallback = true;
 
 		if (!(debugMode & btIDebugDraw::DBG_DrawWireframe))
 		{
-			///you can comment out any of the specific cases, and use the default
-
-			///the benefit of 'default' is that it approximates the actual collision shape including collision margin
-			//int shapetype=m_textureenabled?MAX_BROADPHASE_COLLISION_TYPES:shape->getShapeType();
 			int shapetype=shape->getShapeType();
 			switch (shapetype)
 			{
@@ -576,192 +361,17 @@ void  ShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, const 
 					break;
 				}
 
-				case BOX_SHAPE_PROXYTYPE:
-				{
-					const btBoxShape* boxShape = static_cast<const btBoxShape*>(shape);
-					btVector3 halfExtent = boxShape->getHalfExtentsWithMargin();
-					
-					static int indices[36] = {
-						0,1,2,
-						3,2,1,
-						4,0,6,
-						6,0,2,
-						5,1,4,
-						4,1,0,
-						7,3,1,
-						7,1,5,
-						5,4,7,
-						7,4,6,
-						7,2,3,
-						7,6,2};
-
-					 btVector3 vertices[8]={	
-						btVector3(halfExtent[0],halfExtent[1],halfExtent[2]),
-						btVector3(-halfExtent[0],halfExtent[1],halfExtent[2]),
-						btVector3(halfExtent[0],-halfExtent[1],halfExtent[2]),	
-						btVector3(-halfExtent[0],-halfExtent[1],halfExtent[2]),	
-						btVector3(halfExtent[0],halfExtent[1],-halfExtent[2]),
-						btVector3(-halfExtent[0],halfExtent[1],-halfExtent[2]),	
-						btVector3(halfExtent[0],-halfExtent[1],-halfExtent[2]),	
-						btVector3(-halfExtent[0],-halfExtent[1],-halfExtent[2])};
-#if 1
-					glBegin (GL_TRIANGLES);
-					int si=36;
-					for (int i=0;i<si;i+=3)
-					{
-						const btVector3& v1 = vertices[indices[i]];;
-						const btVector3& v2 = vertices[indices[i+1]];
-						const btVector3& v3 = vertices[indices[i+2]];
-						btVector3 normal = (v3-v1).cross(v2-v1);
-						normal.normalize ();
-						glNormal3f(normal.getX(),normal.getY(),normal.getZ());
-						glVertex3f (v1.x(), v1.y(), v1.z());
-						glVertex3f (v2.x(), v2.y(), v2.z());
-						glVertex3f (v3.x(), v3.y(), v3.z());
-						
-					}
-					glEnd();
-#endif
-
-					useWireframeFallback = false;
-					break;
-				}
-
-
-
-#if 0
-			
-			case CONE_SHAPE_PROXYTYPE:
-				{
-					const btConeShape* coneShape = static_cast<const btConeShape*>(shape);
-					int upIndex = coneShape->getConeUpIndex();
-					float radius = coneShape->getRadius();//+coneShape->getMargin();
-					float height = coneShape->getHeight();//+coneShape->getMargin();
-					switch (upIndex)
-					{
-					case 0:
-						glRotatef(90.0, 0.0, 1.0, 0.0);
-						break;
-					case 1:
-						glRotatef(-90.0, 1.0, 0.0, 0.0);
-						break;
-					case 2:
-						break;
-					default:
-						{
-						}
-					};
-
-					glTranslatef(0.0, 0.0, -0.5*height);
-					glutSolidCone(radius,height,10,10);
-					useWireframeFallback = false;
-					break;
-
-				}
-#endif
-
-			case STATIC_PLANE_PROXYTYPE:
-				{
-					const btStaticPlaneShape* staticPlaneShape = static_cast<const btStaticPlaneShape*>(shape);
-					btScalar planeConst = staticPlaneShape->getPlaneConstant();
-					const btVector3& planeNormal = staticPlaneShape->getPlaneNormal();
-					btVector3 planeOrigin = planeNormal * planeConst;
-					btVector3 vec0,vec1;
-					btPlaneSpace1(planeNormal,vec0,vec1);
-					btScalar vecLen = 100.f;
-					btVector3 pt0 = planeOrigin + vec0*vecLen;
-					btVector3 pt1 = planeOrigin - vec0*vecLen;
-					btVector3 pt2 = planeOrigin + vec1*vecLen;
-					btVector3 pt3 = planeOrigin - vec1*vecLen;
-					glBegin(GL_LINES);
-					glVertex3f(pt0.getX(),pt0.getY(),pt0.getZ());
-					glVertex3f(pt1.getX(),pt1.getY(),pt1.getZ());
-					glVertex3f(pt2.getX(),pt2.getY(),pt2.getZ());
-					glVertex3f(pt3.getX(),pt3.getY(),pt3.getZ());
-					glEnd();
-
-
-					break;
-
-				}
-
-/*
-			case CYLINDER_SHAPE_PROXYTYPE:
-				{
-					const btCylinderShape* cylinder = static_cast<const btCylinderShape*>(shape);
-					int upAxis = cylinder->getUpAxis();
-
-
-					float radius = cylinder->getRadius();
-					float halfHeight = cylinder->getHalfExtentsWithMargin()[upAxis];
-
-					drawCylinder(radius,halfHeight,upAxis);
-
-					break;
-				}
-*/
-
-			case MULTI_SPHERE_SHAPE_PROXYTYPE:
-			{
-				const btMultiSphereShape* multiSphereShape = static_cast<const btMultiSphereShape*>(shape);
-
-				btTransform childTransform;
-				childTransform.setIdentity();
-
-				
-				for (int i = multiSphereShape->getSphereCount()-1; i>=0;i--)
-				{
-					btSphereShape sc(multiSphereShape->getSphereRadius(i));
-					childTransform.setOrigin(multiSphereShape->getSpherePosition(i));
-					btScalar childMat[16];
-					childTransform.getOpenGLMatrix(childMat);
-					drawOpenGL(childMat,&sc,color,debugMode,worldBoundsMin,worldBoundsMax);
-				}
-
-				break;
-			}
-
-			default:
+    		default:
 				{
 
 
 					if (shape->isConvex())
 					{
 						ShapeCache*	sc=cache((btConvexShape*)shape);
-#if 0
-						btConvexShape* convexShape = (btConvexShape*)shape;
-						if (!shape->getUserPointer())
+        
+						btShapeHull* hull = &sc->m_shapehull;
+						if (hull->numTriangles () > 0)
 						{
-							//create a hull approximation
-							void* mem = btAlignedAlloc(sizeof(btShapeHull),16);
-							btShapeHull* hull = new(mem) btShapeHull(convexShape);
-
-							///cleanup memory
-							m_shapeHulls.push_back(hull);
-
-							btScalar margin = shape->getMargin();
-							hull->buildHull(margin);
-							convexShape->setUserPointer(hull);
-
-
-							//	printf("numTriangles = %d\n", hull->numTriangles ());
-							//	printf("numIndices = %d\n", hull->numIndices ());
-							//	printf("numVertices = %d\n", hull->numVertices ());
-
-
-						}
-#endif
-
-
-
-						//if (shape->getUserPointer())
-						{
-							//glutSolidCube(1.0);
-							btShapeHull* hull = &sc->m_shapehull/*(btShapeHull*)shape->getUserPointer()*/;
-
-
-							if (hull->numTriangles () > 0)
-							{
 								int index = 0;
 								const unsigned int* idx = hull->getIndexPointer();
 								const btVector3* vtx = hull->getVertexPointer();
@@ -797,7 +407,6 @@ void  ShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, const 
 								}
 								glEnd ();
 
-							}
 						}
 					}
 				}
@@ -809,53 +418,6 @@ void  ShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, const 
 		glNormal3f(0,1,0);
 	
 
-		/// for polyhedral shapes
-		if (debugMode==btIDebugDraw::DBG_DrawFeaturesText && (shape->isPolyhedral()))
-		{
-			btPolyhedralConvexShape* polyshape = (btPolyhedralConvexShape*) shape;
-
-			{
-
-				glColor3f(1.f, 1.f, 1.f);
-				int i;
-				for (i=0;i<polyshape->getNumVertices();i++)
-				{
-					btVector3 vtx;
-					polyshape->getVertex(i,vtx);
-					char buf[12];
-					sprintf(buf," %d",i);
-					//btDrawString(BMF_GetFont(BMF_kHelvetica10),buf);
-				}
-
-				for (i=0;i<polyshape->getNumPlanes();i++)
-				{
-					btVector3 normal;
-					btVector3 vtx;
-					polyshape->getPlane(normal,vtx,i);
-					//btScalar d = vtx.dot(normal);
-
-					//char buf[12];
-					//sprintf(buf," plane %d",i);
-					//btDrawString(BMF_GetFont(BMF_kHelvetica10),buf);
-
-				}
-			}
-
-		}
-
-
-#ifdef USE_DISPLAY_LISTS
-
-		if (shape->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE||shape->getShapeType() == GIMPACT_SHAPE_PROXYTYPE)
-		{
-			GLuint dlist =   OGL_get_displaylist_for_shape((btCollisionShape * )shape);
-			if (dlist)
-			{
-				glCallList(dlist);
-			}
-			else
-			{
-#else		
 		if (shape->isConcave() && !shape->isInfinite())
 		{
 			btConcaveShape* concaveMesh = (btConcaveShape*) shape;
@@ -866,56 +428,20 @@ void  ShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, const 
 			concaveMesh->processAllTriangles(&drawCallback,worldBoundsMin,worldBoundsMax);
 
 		}
-#endif
 
-#ifdef USE_DISPLAY_LISTS
-	}
-}
-#endif
-
-
-
-
-
-	}
 	glPopMatrix();
 
 }
 
-//
-void		ShapeDrawer::drawShadow(btScalar* m,const btVector3& extrusion,const btCollisionShape* shape,const btVector3& worldBoundsMin,const btVector3& worldBoundsMax)
+
+void ShapeDrawer::drawShadow(btScalar* m,const btVector3& extrusion,
+            const btCollisionShape* shape,const btVector3& worldBoundsMin,
+            const btVector3& worldBoundsMax)
 {
 	glPushMatrix(); 
 	btglMultMatrix(m);
-	if(shape->getShapeType() == UNIFORM_SCALING_SHAPE_PROXYTYPE)
-	{
-		const btUniformScalingShape* scalingShape = static_cast<const btUniformScalingShape*>(shape);
-		const btConvexShape* convexShape = scalingShape->getChildShape();
-		float	scalingFactor = (float)scalingShape->getUniformScalingFactor();
-		btScalar tmpScaling[4][4]={	{scalingFactor,0,0,0},
-		{0,scalingFactor,0,0},
-		{0,0,scalingFactor,0},
-		{0,0,0,1}};
-		drawShadow((btScalar*)tmpScaling,extrusion,convexShape,worldBoundsMin,worldBoundsMax);
-		glPopMatrix();
-		return;
-	}
-	else if(shape->getShapeType()==COMPOUND_SHAPE_PROXYTYPE)
-	{
-		const btCompoundShape* compoundShape = static_cast<const btCompoundShape*>(shape);
-		for (int i=compoundShape->getNumChildShapes()-1;i>=0;i--)
-		{
-			btTransform childTrans = compoundShape->getChildTransform(i);
-			const btCollisionShape* colShape = compoundShape->getChildShape(i);
-			btScalar childMat[16];
-			childTrans.getOpenGLMatrix(childMat);
-			drawShadow(childMat,extrusion*childTrans.getBasis(),colShape,worldBoundsMin,worldBoundsMax);
-		}
-	}
-	else
-	{
-	//	bool useWireframeFallback = true;
-		if (shape->isConvex())
+	
+	if (shape->isConvex())
 		{
 			ShapeCache*	sc=cache((btConvexShape*)shape);
 			btShapeHull* hull =&sc->m_shapehull;
@@ -937,18 +463,12 @@ void		ShapeDrawer::drawShadow(btScalar* m,const btVector3& extrusion,const btCol
 			glEnd();
 		}
 
-	}
-
-
-
-	if (shape->isConcave())//>getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE||shape->getShapeType() == GIMPACT_SHAPE_PROXYTYPE)
-		//		if (shape->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE)
+	if (shape->isConcave())
 	{
 		btConcaveShape* concaveMesh = (btConcaveShape*) shape;
 
 		GlDrawcallback drawCallback;
 		drawCallback.m_wireframe = false;
-
 		concaveMesh->processAllTriangles(&drawCallback,worldBoundsMin,worldBoundsMax);
 
 	}
@@ -959,9 +479,7 @@ void		ShapeDrawer::drawShadow(btScalar* m,const btVector3& extrusion,const btCol
 //
 ShapeDrawer::ShapeDrawer()
 {
-	m_texturehandle			=	0;
-	m_textureenabled		=	false;
-	m_textureinitialized	=	false;
+	m_textureenabled		=	true;
 }
 
 ShapeDrawer::~ShapeDrawer()
@@ -973,10 +491,10 @@ ShapeDrawer::~ShapeDrawer()
 		btAlignedFree(m_shapecaches[i]);
 	}
 	m_shapecaches.clear();
-	if(m_textureinitialized)
-	{
-		glDeleteTextures(1,(const GLuint*) &m_texturehandle);
-	}
+	for(int i=0; i<m_textureinitialized.size();i++)
+    	if(m_textureinitialized[i])
+	    {
+		glDeleteTextures(1,(const GLuint*) &m_texturehandle[i]);
+	    }
 }
-
 

@@ -1,16 +1,7 @@
 /*
-Bullet Continuous Collision Detection and Physics Library
-Copyright (c) 2003-2006 Erwin Coumans  http://continuousphysics.com/Bullet/
-
-This software is provided 'as-is', without any express or implied warranty.
-In no event will the authors be held liable for any damages arising from the use of this software.
-Permission is granted to anyone to use this software for any purpose, 
-including commercial applications, and to alter it and redistribute it freely, 
-subject to the following restrictions:
-
-1. The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation would be appreciated but is not required.
-2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
-3. This notice may not be removed or altered from any source distribution.
+* Adapted from Bullet distribution
+* By JuanPi Carbajal carbajal@ifi.uzh.ch
+* 05.2010
 */
 
 
@@ -20,6 +11,7 @@ subject to the following restrictions:
 
 #include "BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h"//picking
 #include "BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h"//picking
+
 
 #include "BulletCollision/CollisionShapes/btCollisionShape.h"
 #include "BulletCollision/CollisionShapes/btBoxShape.h"
@@ -33,32 +25,20 @@ subject to the following restrictions:
 #include "LinearMath/btSerializer.h"
 #include "GLDebugFont.h"
 
+#define BT_NO_PROFILE 1
+
 extern bool gDisableDeactivation;
 int numObjects = 0;
 const int maxNumObjects = 16384;
 btTransform startTransforms[maxNumObjects];
 btCollisionShape* gShapePtr[maxNumObjects];//1 rigidbody has 1 shape (no re-use of shapes)
-#define SHOW_NUM_DEEP_PENETRATIONS 1
 
 extern int gNumClampedCcdMotions;
-
-#ifdef SHOW_NUM_DEEP_PENETRATIONS 
-extern int gNumDeepPenetrationChecks;
-
-extern int gNumSplitImpulseRecoveries;
-extern int gNumGjkChecks;
-extern int gNumAlignedAllocs;
-extern int gNumAlignedFree;
-extern int gTotalBytesAlignedAllocs;
-
-#endif //
-
 
 Application::Application()
 //see btIDebugDraw.h for modes
 :
 m_dynamicsWorld(0),
-m_pickConstraint(0),
 m_shootBoxShape(0),
 m_cameraDistance(15.0),
 m_debugMode(0),
@@ -92,6 +72,7 @@ m_defaultContactProcessingThreshold(BT_LARGE_FLOAT)
 
 	m_shapeDrawer = new ShapeDrawer ();
 	m_shapeDrawer->enableTexture(true);
+	
 	m_enableshadows = false;
 }
 
@@ -142,15 +123,12 @@ void Application::myinit(void)
 	glEnable(GL_LIGHT0);
 	glEnable(GL_LIGHT1);
 
-
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
 	glClearColor(btScalar(0.7),btScalar(0.7),btScalar(0.7),btScalar(0));
 
-	//  glEnable(GL_CULL_FACE);
-	//  glCullFace(GL_BACK);
 }
 
 
@@ -229,12 +207,12 @@ void Application::updateCamera() {
 		extents *= m_cameraDistance;
 		btVector3 lower = m_cameraTargetPosition - extents;
 		btVector3 upper = m_cameraTargetPosition + extents;
-		//gluOrtho2D(lower.x, upper.x, lower.y, upper.y);
+
 		glOrtho(lower.getX(), upper.getX(), lower.getY(), upper.getY(),-1000,1000);
 		
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		//glTranslatef(100,210,0);
+
 	} else
 	{
 		if (m_glutScreenWidth > m_glutScreenHeight) 
@@ -320,12 +298,7 @@ void Application::keyboardCallback(unsigned char key, int x, int y)
 	switch (key) 
 	{
 	case 'q' : 
-#ifdef BT_USE_FREEGLUT
-		//return from glutMainLoop(), detect memory leaks etc.
-		glutLeaveMainLoop();
-#else
 		exit(0);
-#endif
 		break;
 
 	case 'l' : stepLeft(); break;
@@ -362,7 +335,7 @@ void Application::keyboardCallback(unsigned char key, int x, int y)
 		{
 			int maxSerializeBufferSize = 1024*1024*5;
 			btDefaultSerializer*	serializer = new btDefaultSerializer(maxSerializeBufferSize);
-			//serializer->setSerializationFlags(BT_SERIALIZE_NO_DUPLICATE_ASSERT);
+
 			m_dynamicsWorld->serialize(serializer);
 			FILE* f2 = fopen("testFile.bullet","wb");
 			fwrite(serializer->getBufferPointer(),serializer->getCurrentBufferSize(),1,f2);
@@ -442,11 +415,11 @@ void Application::keyboardCallback(unsigned char key, int x, int y)
 
 	case 'o' :
 		{
-			m_ortho = !m_ortho;//m_stepping = !m_stepping;
+			m_ortho = !m_ortho;
 			break;
 		}
 	case 's' : clientMoveAndDisplay(); break;
-		//    case ' ' : newRandom(); break;
+
 	case ' ':
 		clientResetScene();
 		break;
@@ -550,18 +523,8 @@ void	Application::shootBox(const btVector3& destination)
 	}
 }
 
-
-int gPickingConstraintId = 0;
-btVector3 gOldPickingPos;
-btVector3 gHitPos(-1,-1,-1);
-float gOldPickingDist  = 0.f;
-btRigidBody* pickedBody = 0;//for deactivation state
-
-
 btVector3	Application::getRayTo(int x,int y)
 {
-
-	
 
 	if (m_ortho)
 	{
@@ -642,9 +605,6 @@ btVector3	Application::getRayTo(int x,int y)
 	return rayTo;
 }
 
-btScalar mousePickClamping = 30.f;
-
-
 void Application::mouseFunc(int button, int state, int x, int y)
 {
 	if (state == 0) 
@@ -657,17 +617,6 @@ void Application::mouseFunc(int button, int state, int x, int y)
 
 	m_mouseOldX = x;
     m_mouseOldY = y;
-
-/*
-	updateModifierKeys();
-	if ((m_modifierKeys& BT_ACTIVE_ALT) && (state==0))
-	{
-		return;
-	}
-*/
-
-	//printf("button %i, state %i, x=%i,y=%i\n",button,state,x,y);
-	//button 0, state 0 means left mouse down
 
 	btVector3 rayTo = getRayTo(x,y);
 
@@ -707,11 +656,10 @@ void	Application::mouseMotionFunc(int x,int y)
     if(m_mouseButtons & 4) 
 	{
 		m_azi += dx * btScalar(0.2);
-//    	m_azi = fmodf(m_azi, btScalar(30.f));
         if (m_azi > 30.f || m_azi < -30.f)
             m_azi = m_azi*30.f/fabs(m_azi);
+
 		m_ele += dy * btScalar(0.2);
-//		m_ele = fmodf(m_ele, btScalar(10.f));
         if (m_ele > 15.f || m_ele < -15.f)
             m_ele = m_ele*15.f/fabs(m_ele);
 
@@ -859,10 +807,6 @@ void Application::showProfileInfo(int& xOffset,int& yStart, int yIncr)
 
 	}
 #endif//BT_NO_PROFILE
-
-
-
-
 }
 
 
@@ -872,7 +816,7 @@ void	Application::renderscene(int pass)
 	btScalar	m[16];
 	btMatrix3x3	rot;rot.setIdentity();
 	const int	numObjects=m_dynamicsWorld->getNumCollisionObjects();
-	btVector3 wireColor(1,0,0);
+
 	for(int i=0;i<numObjects;i++)
 	{
 		btCollisionObject*	colObj=m_dynamicsWorld->getCollisionObjectArray()[i];
@@ -889,52 +833,36 @@ void	Application::renderscene(int pass)
 			colObj->getWorldTransform().getOpenGLMatrix(m);
 			rot=colObj->getWorldTransform().getBasis();
 		}
-		
-		btVector3 wireColor(1.f,1.0f,0.5f); //wants deactivation
-		
-		if(i&1) wireColor=btVector3(0.f,0.0f,1.f);
-		
-		///color differently for active, sleeping, wantsdeactivation states
-		if (colObj->getActivationState() == 1) //active
-		{
-			if (i & 1)
-			{
-				wireColor += btVector3 (1.f,0.f,0.f);
-			}
-			else
-			{			
-				wireColor += btVector3 (.5f,0.f,0.f);
-			}
-		}
-		if(colObj->getActivationState()==2) //ISLAND_SLEEPING
-		{
-			if(i&1)
-			{
-				wireColor += btVector3 (0.f,1.f, 0.f);
-			}
-			else
-			{
-				wireColor += btVector3 (0.f,0.5f,0.f);
-			}
-		}
-
 		btVector3 aabbMin,aabbMax;
 		m_dynamicsWorld->getBroadphase()->getBroadphaseAabb(aabbMin,aabbMax);
 		
 		aabbMin-=btVector3(BT_LARGE_FLOAT,BT_LARGE_FLOAT,BT_LARGE_FLOAT);
 		aabbMax+=btVector3(BT_LARGE_FLOAT,BT_LARGE_FLOAT,BT_LARGE_FLOAT);
-//		printf("aabbMin=(%f,%f,%f)\n",aabbMin.getX(),aabbMin.getY(),aabbMin.getZ());
-//		printf("aabbMax=(%f,%f,%f)\n",aabbMax.getX(),aabbMax.getY(),aabbMax.getZ());
-//		m_dynamicsWorld->getDebugDrawer()->drawAabb(aabbMin,aabbMax,btVector3(1,1,1));
 
 
 		if (!(getDebugMode()& btIDebugDraw::DBG_DrawWireframe))
 		{
+//    		printf("renderizanod pass %d\n",pass);
 			switch(pass)
 			{
-			case	0:	m_shapeDrawer->drawOpenGL(m,colObj->getCollisionShape(),wireColor,getDebugMode(),aabbMin,aabbMax);break;
-			case	1:	m_shapeDrawer->drawShadow(m,m_sundirection*rot,colObj->getCollisionShape(),aabbMin,aabbMax);break;
-			case	2:	m_shapeDrawer->drawOpenGL(m,colObj->getCollisionShape(),wireColor*btScalar(0.3),0,aabbMin,aabbMax);break;
+			case	0:	m_shapeDrawer->drawOpenGL(m,colObj->getCollisionShape(),
+			                getDebugMode(),aabbMin,aabbMax,obj_id[body]);break;
+			case	1:	m_shapeDrawer->drawShadow(m,m_sundirection*rot,
+			                colObj->getCollisionShape(),aabbMin,aabbMax);break;
+			case	2:	
+			  {
+	            Color color=m_shapeDrawer->m_materials[obj_id[body]].getDiffuse();
+
+                float scalec=0.3;
+	            m_shapeDrawer->m_materials[obj_id[body]].setDiffuse(Color(color.r*scalec,
+	                                                              color.g*scalec,
+	                                                              color.b*scalec));
+
+	            m_shapeDrawer->drawOpenGL(m,colObj->getCollisionShape(),
+			                            0,aabbMin,aabbMax,obj_id[body]);break;
+
+	            m_shapeDrawer->m_materials[obj_id[body]].setDiffuse(color);			                            
+			  }
 			}
 		}
 	}
@@ -953,20 +881,26 @@ void Application::renderme()
 		{
 			glClear(GL_STENCIL_BUFFER_BIT);
 			glEnable(GL_CULL_FACE);
+			
 			renderscene(0);
 
 			glDisable(GL_LIGHTING);
 			glDepthMask(GL_FALSE);
 			glDepthFunc(GL_LEQUAL);
+
 			glEnable(GL_STENCIL_TEST);
 			glColorMask(GL_FALSE,GL_FALSE,GL_FALSE,GL_FALSE);
 			glStencilFunc(GL_ALWAYS,1,0xFFFFFFFFL);
 			glFrontFace(GL_CCW);
 			glStencilOp(GL_KEEP,GL_KEEP,GL_INCR);
+			
 			renderscene(1);
+			
 			glFrontFace(GL_CW);
 			glStencilOp(GL_KEEP,GL_KEEP,GL_DECR);
+			
 			renderscene(1);
+			
 			glFrontFace(GL_CCW);
 
 			glPolygonMode(GL_FRONT,GL_FILL);
@@ -985,7 +919,9 @@ void Application::renderme()
 			glStencilFunc( GL_NOTEQUAL, 0, 0xFFFFFFFFL );
 			glStencilOp( GL_KEEP, GL_KEEP, GL_KEEP );
 			glDisable(GL_LIGHTING);
+			
 			renderscene(2);
+			
 			glEnable(GL_LIGHTING);
 			glDepthFunc(GL_LESS);
 			glDisable(GL_STENCIL_TEST);
@@ -1011,30 +947,6 @@ void Application::renderme()
 
 			showProfileInfo(xOffset,yStart,yIncr);
 
-#ifdef USE_QUICKPROF
-
-		
-			if ( getDebugMode() & btIDebugDraw::DBG_ProfileTimings)
-			{
-				static int counter = 0;
-				counter++;
-				std::map<std::string, hidden::ProfileBlock*>::iterator iter;
-				for (iter = btProfiler::mProfileBlocks.begin(); iter != btProfiler::mProfileBlocks.end(); ++iter)
-				{
-					char blockTime[128];
-					sprintf(blockTime, "%s: %lf",&((*iter).first[0]),btProfiler::getBlockTime((*iter).first, btProfiler::BLOCK_CYCLE_SECONDS));//BLOCK_TOTAL_PERCENT));
-					glRasterPos3f(xOffset,yStart,0);
-					GLDebugDrawString(BMF_GetFont(BMF_kHelvetica10),blockTime);
-					yStart += yIncr;
-
-				}
-
-			}
-#endif //USE_QUICKPROF
-
-
-			
-
 			resetPerspectiveProjection();
 		}
 
@@ -1051,10 +963,6 @@ void Application::renderme()
 
 void	Application::clientResetScene()
 {
-#ifdef SHOW_NUM_DEEP_PENETRATIONS
-	gNumDeepPenetrationChecks = 0;
-	gNumGjkChecks = 0;
-#endif //SHOW_NUM_DEEP_PENETRATIONS
 
 	gNumClampedCcdMotions = 0;
 	int numObjects = 0;
@@ -1085,10 +993,7 @@ void	Application::clientResetScene()
 					colObj->forceActivationState(ACTIVE_TAG);
 					colObj->activate();
 					colObj->setDeactivationTime(0);
-					//colObj->setActivationState(WANTS_DEACTIVATION);
 				}
-				//removed cached contact points (this is not necessary if all objects have been removed from the dynamics world)
-				//m_dynamicsWorld->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(colObj->getBroadphaseHandle(),getDynamicsWorld()->getDispatcher());
 
 				btRigidBody* body = btRigidBody::upcast(colObj);
 				if (body && !body->isStaticObject())

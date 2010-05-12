@@ -10,7 +10,6 @@
 
 #include "soundClass.hpp"
 
-
 class btBroadphaseInterface;
 class btCollisionShape;
 class btOverlappingPairCache;
@@ -23,7 +22,6 @@ class btTriangleIndexVertexArray;
 class btGImpactMeshShape;
 class btCollisionObject;
 
-///ShootingDemo shows basic stacking using Bullet physics, and allows toggle of Ccd (using key '1')
 class ShootingDemo : public GlutApplication
 {
 	//keep the collision shapes, for deletion/cleanup
@@ -44,6 +42,16 @@ class ShootingDemo : public GlutApplication
     btGImpactMeshShape * m_trimeshShape;
 
 public:
+
+    enum object {
+    ball,
+    can,
+    bunny,
+    wall,
+    roof,
+    ground,
+    table
+    };
 
     void myinit(void);
 
