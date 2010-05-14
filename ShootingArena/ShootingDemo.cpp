@@ -597,6 +597,7 @@ void ShootingDemo::shootBox(const btVector3& destination)
 		
         sounder.setSourcePosition(-camPos[0],camPos[1],camPos[2]);
         sounder.playSound(BANG);
+      	m_boxes += 1;
         
 	}
 }

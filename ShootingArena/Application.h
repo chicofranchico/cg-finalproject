@@ -67,7 +67,7 @@ class Application
 	
 public:
 	int	m_modifierKeys;
-
+    int m_boxes;
     std::map<btRigidBody*,int>  obj_id;
     
     void	displayProfileString(int xOffset,int yStart,char* message);
