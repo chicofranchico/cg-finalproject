@@ -61,7 +61,6 @@ m_ShootBoxInitialSpeed(40.f),
 m_stepping(true),
 m_singleStep(false),
 m_idle(false),
-
 m_enableshadows(false),
 m_sundirection(btVector3(1,-2,1)*1000),
 m_defaultContactProcessingThreshold(BT_LARGE_FLOAT)
@@ -74,6 +73,7 @@ m_defaultContactProcessingThreshold(BT_LARGE_FLOAT)
 	m_shapeDrawer->enableTexture(true);
 	
 	m_enableshadows = false;
+	m_boxes = 0;
 }
 
 
@@ -807,6 +807,9 @@ void Application::showProfileInfo(int& xOffset,int& yStart, int yIncr)
 
 	}
 #endif//BT_NO_PROFILE
+    char blockTime[128];
+    sprintf(blockTime,"Balls shoot: %d ",m_boxes);
+    displayProfileString(xOffset,yStart,blockTime);
 }
 
 
@@ -941,7 +944,7 @@ void Application::renderme()
 		glDisable(GL_LIGHTING);
 		glColor3f(0, 0, 0);
 
-		if ((m_debugMode & btIDebugDraw::DBG_NoHelpText)==0)
+//		if ((m_debugMode & btIDebugDraw::DBG_NoHelpText)==0)
 		{
 			setOrthographicProjection();
 
