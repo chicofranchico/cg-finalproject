@@ -37,7 +37,7 @@ ${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL
 
 LINK_LIBRARIES(
 	OpenGLSupport  
-BulletDynamics  BulletCollision LinearMath  glut alut
+BulletDynamics  BulletCollision LinearMath GLU glut alut
 	)
 
 ADD_EXECUTABLE(AppShootingDemo
