@@ -114,15 +114,6 @@ void Scene::initialize()
 
     musicOn = false;
 
-    //_sounder = new SceneSoundClass();
-
-    //sounder = new SceneSoundClass();
-
-    //_sound = new SceneSoundClass();
-
-    //_sounder->playSound(BOOM);
-
-
 }
 
 
@@ -186,6 +177,8 @@ void Scene::draw()
 	if ( selector == 0 )
 	{
 
+		//these are all initial parameters for the program
+
 		_cameraPosition = SphericalCoordinates( 10, 0.0, 0.0 );
 		_cameraCenter = Point( 0.0, 0.0, 0.0 );
 
@@ -212,6 +205,7 @@ void Scene::draw()
 		//menu text
 		DrawMenuText();
 
+		//to play the opening song
 		if (!musicOn)
 		{
 			musicOn = true;
@@ -248,11 +242,13 @@ void Scene::draw()
 		//draw scene
 		_stage->draw( _renderParameters );
 
+		//this basically determines the speed of the guy
 		growth += 0.17;
 
 		//sinus function simulating step
 		sinusY = 4.5 + (sin(growth))/6;
 
+		//initial walk
 		if(_theta < 4.5)
 		{
 			Camera::LookAtData lookAtData(
@@ -295,8 +291,6 @@ void Scene::draw()
 			//s.getCartesianPoint(p);
 			s.set(position, center);
 
-			//std::cout << s.radius << " " << s.elevation << " " << s.azimuth << std::endl;
-
 			_cameraCenter = Point( temp, 5.0, 1.0 );
 			_cameraPosition = SphericalCoordinates(s.radius, 0, -76.9476 + (_theta - 5.0) );
 
@@ -306,12 +300,14 @@ void Scene::draw()
 
 		}
 	}
+	//will run the game
 	else if ( selector == 3 )
 	{
 
 		_stage->sounder->stopSound(BOOM);
 		_stage->stopAllSound();
 
+		//TODO: CHANGE THIS
 		system("/home/chico/cg-finalproject/ShootingArena/AppShootingDemo");
 
 		_stage->setupSound();
@@ -320,11 +316,13 @@ void Scene::draw()
 		selector = 0;
 
 	}
+	//will run the ending
 	else if ( selector == 4 )
 	{
 		_stage->sounder->stopSound(BOOM);
 		_stage->stopAllSound();
 
+		//TODO: CHANGE THIS
 		system("/home/chico/cg-finalproject/Particle221Src/Particle2/Example/example");
 
 		_stage->setupSound();
@@ -350,6 +348,7 @@ void Scene::DrawMenuText( )
 
 	float space = 0.0;
 
+	//first choice
 	for ( int i = 0; i < 14; i++ )
 	{
 
@@ -365,11 +364,11 @@ void Scene::DrawMenuText( )
 
 	space = 0.0;
 
+	//second choice
 	for ( int i = 0; i < 4; i++ )
 	{
 
 		glPushMatrix();
-			//glRotatef(90 * i, 0, 1, 0);
 			glTranslatef(-12 + space, -1.0, -4.0);
 			t3dDraw3D(PLAY[i], 0, 0, 0.15f);
 		glPopMatrix();
@@ -380,11 +379,11 @@ void Scene::DrawMenuText( )
 
 	space = 0.0;
 
+	//third choice
 	for ( int i = 0; i < 9; i++ )
 	{
 
 		glPushMatrix();
-			//glRotatef(90 * i, 0, 1, 0);
 			glTranslatef(-12 + space, -4.0, -4.0);
 			t3dDraw3D(GAME_OVER[i], 0, 0, 0.15f);
 		glPopMatrix();
@@ -392,8 +391,6 @@ void Scene::DrawMenuText( )
 		space += 1.125;
 
 	}
-
-
 
 }
 
@@ -405,7 +402,7 @@ void Scene::DrawTitle( )
 
 	float space = 0.0;
 
-
+	//the flashy title of the initial screen
 	for ( int i = 0; i < 11; i++ )
 	{
 
@@ -460,12 +457,11 @@ void Scene::DrawTitle( )
 
 }
 
+/*
+ * Debug
+ */
 void Scene::reset()
 {
-    //// EXERCISE 06 : Reset data to initial values
-    // Write code here to reset data like renderParameters, etc to initial values.
-    // Reset all data that can be changed over time with key press or mouse click.
-
 	//reset parameters
 	_renderParameters.drawMode = RenderParameters::POLYGON;
 	_renderParameters.smoothShading = true;
@@ -504,7 +500,7 @@ void Scene::onEvent( const KeyDownEvent &event )
         // if ( event.key == 'x' ) // 'x' character without CTRL or ALT modifiers
 		switch ( event.key )
 		{
-		// Enter
+		// press Enter
 		case 13 :
 
 			if ( sphereY == 2.0 && selector == 0 )
@@ -521,26 +517,16 @@ void Scene::onEvent( const KeyDownEvent &event )
 			}
 
 			break;
-		case 'x':
-			{
-				std::cout << _cameraPosition.radius << " " << _cameraPosition.elevation << " " << _cameraPosition.azimuth << std::endl;
-				std::cout << _cameraCenter.x << " " << _cameraCenter.y << " " << _cameraCenter.z << std::endl;
-				break;
-			}
 		case 'r':
 		case 'R':
 			{
 				reset();
 				break;
 			}
-		case 'c':
-		case 'C':
-			{
-
-			}
 		case 'm':
 		case 'M':
 			{
+				//song on/off
 				break;
 			}
 		case 's':
@@ -549,22 +535,13 @@ void Scene::onEvent( const KeyDownEvent &event )
 				_renderParameters.smoothShading = ! _renderParameters.smoothShading;
 				break;
 			}
+			//when the guy is at the scene, pressing 1 goes back to the main menu
         case '1':
             {
                 selector = 0;
                 _stage->sounder->stopSound(START);
                 _stage->sounder->stopSound(WALK);
                 musicOn = false;
-                break;
-            }
-        case '2':
-            {
-                //_stage->_directionalLight->turnOn( !_stage->_directionalLight->isOn() );
-                break;
-            }
-        case '3':
-            {
-                //_stage->_spotLight->turnOn( !_stage->_spotLight->isOn() );
                 break;
             }
                 
@@ -677,11 +654,7 @@ void Scene::onEvent( const MouseLeaveEvent &event )
 
 void Scene::onEvent( const MouseMoveEvent &event )
 {
-    //// EXERCISE 06 : Make the necessary updates to code here to be able to manipulate stage or scene camera.
-    // Update code here so that mouse mouvement changes the correct camera according to _cameraMode.
 
-	//std::cout << _cameraPosition.radius << " " << _cameraPosition.elevation << " " << _cameraPosition.azimuth << std::endl;
-    
     if ( event.passive == false && _cameraMode == SCENE_VIEW )
     {
 		if ( _tracking )
