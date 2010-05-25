@@ -37,6 +37,16 @@ class PositionalLight;
 class DirectionalLight;
 class SpotLight;
 
+#define GRASS 	0
+#define SHRUB 	1
+#define TREE 	2
+#define TREETOP 3
+#define TREE02 	4
+#define FENCE 	5
+#define RAILS	6
+#define MONO	7
+#define BUNNY	8
+
 /** Represents a virtual stage of objects to be rendered */
 class Stage : public Drawable
 {
@@ -109,11 +119,7 @@ public:
 
 	bool soundInit;
 
-	void draw2( void );
-
 	void setupCubeWorld(void);
-
-	//void startSound(void);
 
 	void stopAllSound(void);
 
@@ -121,13 +127,12 @@ public:
 
 	void startSceneSound(void);
 
-
 private:
     float l[3], n[3], e[3];
 
 	void loadImage(const char *szFileName, GLuint &texid );
 
-	void initDrawings( const RenderParameters &renderParameters );
+	void initDisplayLists( const RenderParameters &renderParameters );
 
 	void DrawSkyBox(void);
 
@@ -136,7 +141,6 @@ private:
 	void load3DModels( void );
 
 	GLbyte *gltLoadTGA(const char *szFileName, GLint *iWidth, GLint *iHeight, GLint *iComponents, GLenum *eFormat);
-
 
 	void DrawTextSign (void);
 
@@ -153,7 +157,6 @@ private:
 	void Draw3DObjectsShadows(void);
 
 	void glShadowProjection(float * l, float * e, float * n);
-
 
     
 }; // class Stage

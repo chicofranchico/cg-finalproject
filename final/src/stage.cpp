@@ -22,7 +22,6 @@
 #include "spotLight.hpp"
 #include "utils.hpp"
 
-
 #include <cmath>
 #include <iostream>
 #include <fstream>
@@ -52,19 +51,6 @@ Stage::Stage( Scene &scene ) :
 	texInit = false;
 	objTex 	= false;
 
-	// Six sides of a cube map
-	//const char *szCubeFaces[6] = { "skybox/pos_x.tga", "skybox/neg_x.tga", "skybox/pos_y.tga", "skybox/neg_y.tga", "skybox/pos_z.tga", "skybox/neg_z.tga" };
-
-	/*GLenum  cube[6] = {  GL_TEXTURE_CUBE_MAP_POSITIVE_X,
-                     GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
-                     GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
-                     GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
-                     GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
-                     GL_TEXTURE_CUBE_MAP_NEGATIVE_Z };*/
-
-	//setupCubeWorld ( );
-
-
 	l[0] = 10.0; l[1] = 40.0; l[2] = 10; // Coordinates of the light source
 	n[0] = 0.0; n[1] = -1.0; n[2] = 0.0; // Normal vector for the plane
     e[0] = 0.0; e[1] = 0.0; e[2] = 0.0; // Point of the plane
@@ -72,7 +58,7 @@ Stage::Stage( Scene &scene ) :
     //initialize text 3d api
     t3dInit();
 
-    soundInit = false;
+    //soundInit = false;
 
     sounder = new StageSoundClass();
 
@@ -113,10 +99,13 @@ Stage::~Stage()
 
 }
 
+/*
+ * Should only be called after the object was destroyed by stopAllSound
+ */
 void Stage::setupSound( )
 {
 
-		sounder = new StageSoundClass();
+	sounder = new StageSoundClass();
 
 }
 
@@ -152,19 +141,19 @@ void Stage::reset()
 void Stage::load3DModels()
 {
 
-	const std::string &rails 	= "rails.ply";
-	const std::string &monorail = "monorail.ply";
+	const std::string &rails 	= "models/rails.ply";
+	const std::string &monorail = "models/monorail.ply";
 
-	const std::string &tree  	= "trunk.ply";
-	const std::string &treeTop  = "treeTop.ply";
-	const std::string &shrub1   = "calathea.ply";
+	const std::string &tree  	= "models/trunk.ply";
+	const std::string &treeTop  = "models/treeTop.ply";
+	const std::string &shrub1   = "models/calathea.ply";
 
-	const std::string &grass    = "grass.ply";
-	const std::string &tree02   = "tree02.ply";
+	const std::string &grass    = "models/grass.ply";
+	const std::string &tree02   = "models/tree02.ply";
 
-	const std::string &fence 	= "fence.ply";
+	const std::string &fence 	= "models/fence.ply";
 
-	const std::string &bunny 	= "bunny.ply";
+	const std::string &bunny 	= "models/bunny.ply";
 
 	_monorail = new PLYModel( _scene );
 	_monorail->loadModel( monorail );
@@ -218,7 +207,7 @@ void Stage::loadTextures()
 
 }
 
-void Stage::initDrawings( const RenderParameters &renderParameters )
+void Stage::initDisplayLists( const RenderParameters &renderParameters )
 {
 
 	int dlID = glGenLists( 9 );
@@ -470,6 +459,7 @@ void Stage::setupCubeWorld(  )
 /**
 * http://www.starstonesoftware.com/OpenGL/
 *
+* The main draw function
 */
 void Stage::draw( const RenderParameters &renderParameters )
 {
@@ -499,10 +489,11 @@ void Stage::draw( const RenderParameters &renderParameters )
 	if ( !listInit )
 	{
 		std::cout << "Initializing Display lists" << std::endl;
-		initDrawings( renderParameters );
+		initDisplayLists( renderParameters );
 		std::cout << "Done!" << std::endl;
 	}
 
+	//if the objects' textures haven't been loaded
 	if ( !objTex )
 	{
 		//setup 3D object textures
@@ -527,6 +518,7 @@ void Stage::draw( const RenderParameters &renderParameters )
 	// shadow part //
 	/////////////////
 
+	//enable stuff for shadows
 	setupShadow( );
 
 	//draw scene textures, not world
@@ -540,21 +532,6 @@ void Stage::draw( const RenderParameters &renderParameters )
 
 	//enable world textures again
 	glEnable(GL_TEXTURE_CUBE_MAP_EXT);
-
-
-}
-
-void Stage::draw2( )
-{
-
-	glDisable(GL_LIGHTING);
-
-	//renormalize stuff
-	glEnable(GL_NORMALIZE);
-	glShadeModel(GL_SMOOTH);
-
-	//draw the sign with sweet 3d text
-	DrawTextSign();
 
 
 }
@@ -690,10 +667,6 @@ void Stage::setupObjectTextures( )
     
     glEnable(GL_DEPTH_TEST);	// Hidden surface removal
     glFrontFace(GL_CCW);		// Counter clock-wise polygons face out
-    //glEnable(GL_CULL_FACE);		// Do not calculate inside of jet
-
-    // White background
-//    glClearColor(1.0f, 1.0f, 1.0f, 1.0f );
     
     // Decal texture environment
     glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
@@ -788,6 +761,7 @@ void Stage::DrawTex3DObjects(  )
     glEnable(GL_TEXTURE_GEN_T);
     glDepthMask(GL_TRUE);
 
+    //randomly place the trees in the scene
 	const int MAX_TREES = 20;
 
 	srand(35465146);
@@ -826,7 +800,7 @@ void Stage::DrawTex3DObjects(  )
 			glRotatef(-90,1,0,0);
 			glRotatef(_angles[i],0,0,1);
 			glScalef(5.0,7.5,5.0);
-			glCallList(_lists[2]);
+			glCallList(_lists[TREE]);
 		glPopMatrix();
 	
 		glBindTexture(GL_TEXTURE_2D, _objTextures[1]);
@@ -836,11 +810,12 @@ void Stage::DrawTex3DObjects(  )
 			glRotatef(-90, 1,0,0);
 			glRotatef(_angles[i],0,0,1);
 			glScalef(5.0,7.5,5.0);
-			glCallList(_lists[3]);
+			glCallList(_lists[TREETOP]);
 		glPopMatrix();
 
 	}
 
+	//place the shruberries and the fences
 	float posx = -32.0;
 
 	for ( int i = 0; i < 7; i++ )
@@ -852,7 +827,7 @@ void Stage::DrawTex3DObjects(  )
 			glTranslatef(posx, 0.0, 10);
 			glRotatef(-90, 1,0,0);
 			glScalef(4.0,6.0,4.0);
-			glCallList(_lists[5]);
+			glCallList(_lists[FENCE]);
 		glPopMatrix();
 
 		glBindTexture(GL_TEXTURE_2D, _objTextures[3]);
@@ -861,7 +836,7 @@ void Stage::DrawTex3DObjects(  )
 			glTranslatef(posx, 0.0, 10);
 			glRotatef(-90, 1,0,0);
 			glScalef(4.0,6.0,4.0);
-			glCallList(_lists[5]);
+			glCallList(_lists[FENCE]);
 		glPopMatrix();
 
 		posx += 8.0;
@@ -879,20 +854,21 @@ void Stage::DrawTex3DObjects(  )
 			glTranslatef(posx,0.0, 10.0);
 			glRotatef(-90, 1,0,0);
 			glScalef(3.0,2.5,3.0);
-			glCallList(_lists[4]);
+			glCallList(_lists[TREE02]);
 		glPopMatrix();
 
 		posx += 8.0;
 
 	}
 	
+	//some stupid bunnies
 	glBindTexture(GL_TEXTURE_2D, _objTextures[3]);
 
 	glPushMatrix();
 		glTranslatef(-14.0, 3.0, -6.0);
 		glRotatef(45, 0,1,0);
 		glScalef(7.0, 7.0, 7.0);
-		glCallList(_lists[8]);
+		glCallList(_lists[BUNNY]);
 	glPopMatrix();
 
 
@@ -960,7 +936,6 @@ void Stage::DrawTextures( )
 	glEnd();
 
 	//worn wood texture
-
 	glBindTexture(GL_TEXTURE_2D, texture[2]);
 
 	glBegin(GL_QUADS);
@@ -977,24 +952,7 @@ void Stage::DrawTextures( )
 		glTexCoord2f(0.0f, 1.0f); glVertex3f( -9.0f, 10.0f, -4.0f);
 	glEnd();
 
-	/*glBegin(GL_QUADS);
-		glTexCoord2f(0.0f, 0.0f); glVertex3f( 0.0f, 6.0f,  -4.0f);
-		glTexCoord2f(1.0f, 0.0f); glVertex3f( 9.0f, 6.0f,  -4.0f);
-		glTexCoord2f(1.0f, 1.0f); glVertex3f( 9.0f, 10.0f, -4.0f);
-		glTexCoord2f(0.0f, 1.0f); glVertex3f( 0.0f, 10.0f, -4.0f);
-	glEnd();
-
-	glBegin(GL_QUADS);
-		glTexCoord2f(0.0f, 0.0f); glVertex3f( 9.0f, 6.0f,   -4.0f);
-		glTexCoord2f(1.0f, 0.0f); glVertex3f( 18.0f, 6.0f,  -4.0f);
-		glTexCoord2f(1.0f, 1.0f); glVertex3f( 18.0f, 10.0f, -4.0f);
-		glTexCoord2f(0.0f, 1.0f); glVertex3f( 9.0f, 10.0f,  -4.0f);
-	glEnd();*/
-
 	//floor 
-
-	//glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-
 	glBindTexture(GL_TEXTURE_2D, texture[4]);
 
 	float zs [6]  = { 15.0, 10.0, 5.0, 0.0, -5.0, -10.0 };
@@ -1050,7 +1008,6 @@ void Stage::DrawTextures( )
 		glTexCoord2f(1.0f, 1.0f); glVertex3f( -6.0f, 7.0f, -16.0f);
 		glTexCoord2f(0.0f, 1.0f); glVertex3f( -12.0f, 7.0f, -16.0f);
 	glEnd();
-
 
 	//soup cans
 	glBindTexture(GL_TEXTURE_2D, texture[7]);
@@ -1118,7 +1075,7 @@ void Stage::Draw3DObjects( )
 		glTranslatef(-14.0, 0.0, -6.0);
 		glRotatef(45, 0,1,0);
 		glScalef(7.0, 7.0, 7.0);
-		glCallList(_lists[8]);
+		glCallList(_lists[BUNNY]);
 	glPopMatrix();
 
 
