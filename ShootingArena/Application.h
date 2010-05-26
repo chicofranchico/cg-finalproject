@@ -8,7 +8,7 @@ Permission is granted to anyone to use this software for any purpose,
 including commercial applications, and to alter it and redistribute it freely, 
 subject to the following restrictions:
 
-1. The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation would be appreciated but is not required.
+1. The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledg#include "ShootingDemo.h"ment in the product documentation would be appreciated but is not required.
 2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
 3. This notice may not be removed or altered from any source distribution.
 */
@@ -31,12 +31,15 @@ subject to the following restrictions:
 #include "LinearMath/btQuickprof.h"
 #include "LinearMath/btAlignedObjectArray.h"
 
+#include "/home/rahul/cg-finalproject/Particle/pAPI.h"
+
+using namespace PAPI;
+
 class	btCollisionShape;
 class	btDynamicsWorld;
 class	btRigidBody;
 class	btTypedConstraint;
-
-
+class   ShootingDemo;
 
 class Application
 {
@@ -53,6 +56,8 @@ class Application
 
 	btCollisionShape*	m_shootBoxShape;
 
+	ShootingDemo*  m_shootingDemo;
+
 	float	m_cameraDistance;
 	int	m_debugMode;
 	
@@ -66,6 +71,9 @@ class Application
 	int	m_mouseButtons;
 	
 public:
+
+	ParticleContext_t P;
+        float pos[3];
 	int	m_modifierKeys;
     int m_boxes;
     std::map<btRigidBody*,int>  obj_id;
@@ -73,6 +81,8 @@ public:
     void	displayProfileString(int xOffset,int yStart,char* message);
 protected:
 
+	int flag,end;
+	float px,py,pz;
 	float m_scaleBottom;
 	float m_scaleFactor;
 	btVector3 m_cameraUp;
@@ -92,6 +102,8 @@ protected:
 
 	void showProfileInfo(int& xOffset,int& yStart, int yIncr);
 	void renderscene(int pass);
+
+	void getData();
 
 	ShapeDrawer*	m_shapeDrawer;
 	bool			m_enableshadows;
@@ -189,7 +201,7 @@ public:
 	virtual void clientMoveAndDisplay() = 0;
 
 	virtual void	clientResetScene();
-
+	
 	///Demo functions
 	virtual void setShootBoxShape ();
 	virtual void	shootBox(const btVector3& destination);
