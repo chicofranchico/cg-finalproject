@@ -4,7 +4,7 @@
 * 05.2010
 */
 
-
+#include <stdio.h>
 #include "Application.h"
 #include "LinearMath/btIDebugDraw.h"
 #include "BulletDynamics/Dynamics/btDynamicsWorld.h"
@@ -24,6 +24,11 @@
 #include "LinearMath/btDefaultMotionState.h"
 #include "LinearMath/btSerializer.h"
 #include "GLDebugFont.h"
+#include "ShootingDemo.h"
+
+#include "/home/rahul/cg-finalproject/Particle/pAPI.h"
+
+using namespace PAPI;
 
 #define BT_NO_PROFILE 1
 
@@ -63,6 +68,12 @@ m_singleStep(false),
 m_idle(false),
 m_enableshadows(false),
 m_sundirection(btVector3(1,-2,1)*1000),
+m_shootingDemo(NULL),
+flag(5),
+px(0.0),
+py(4.0),
+pz(4.0),
+end(0),
 m_defaultContactProcessingThreshold(BT_LARGE_FLOAT)
 {
 #ifndef BT_NO_PROFILE
@@ -869,6 +880,44 @@ void	Application::renderscene(int pass)
 			}
 		}
 	}
+
+	if(flag<5)
+	{
+		flag++;
+                ParticleContext_t P;
+
+		int particle_handle = P.GenParticleGroups(1, 1000);
+		P.CurrentGroup(particle_handle);
+
+		P.Velocity(PDSphere(pVec(px - 0.3*px, py - 0.6*py, pz-0.4*pz),1.5, 1.5));
+    
+   		P.Color(PDLine(pVec(1.0f, 0.0f, 0.0f), pVec(1.0f, 1.0f, 1.0f)));
+	
+   		P.Source(1000, PDLine(pVec(px - 0.3*px, py - 0.6*py, pz-0.4*pz), pVec(px - 0.3*px, py - 0.6*py, pz-0.4*pz)));
+		P.Move(true, false);
+
+		size_t cnt = P.GetGroupCount();
+   		if(cnt < 1) return;
+
+    		float *ptr;
+    	size_t flstride, pos3Ofs, posB3Ofs, size3Ofs, vel3Ofs, velB3Ofs, color3Ofs, alpha1Ofs, age1Ofs, up3Ofs, rvel3Ofs, upB3Ofs, mass1Ofs, data1Ofs;
+
+    	cnt = P.GetParticlePointer(ptr, flstride, pos3Ofs, posB3Ofs,
+        size3Ofs, vel3Ofs, velB3Ofs, color3Ofs, alpha1Ofs, age1Ofs,
+        up3Ofs, rvel3Ofs, upB3Ofs, mass1Ofs, data1Ofs);
+    	if(cnt < 1) return;
+
+    	glEnableClientState(GL_COLOR_ARRAY);
+    	glColorPointer(4, GL_FLOAT, int(flstride) * sizeof(float), ptr + color3Ofs);
+
+    	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, int(flstride) * sizeof(float), ptr + pos3Ofs);
+
+    	glDrawArrays(GL_POINTS, 0, (GLsizei)cnt);
+    	glDisableClientState(GL_VERTEX_ARRAY);
+    	glDisableClientState(GL_COLOR_ARRAY);
+	}
+
 }
 
 //
@@ -961,6 +1010,7 @@ void Application::renderme()
 	updateCamera();
 
 }
+
 
 #include "BulletCollision/BroadphaseCollision/btAxisSweep3.h"
 
