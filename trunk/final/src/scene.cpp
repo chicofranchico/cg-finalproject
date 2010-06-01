@@ -53,6 +53,7 @@ Scene::Scene( Window &window ) :
 	selector(0.0)/*,
 	_sounder(NULL)*/
 {
+
 }
 
 Scene::~Scene()

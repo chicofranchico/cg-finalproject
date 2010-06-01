@@ -34,6 +34,7 @@ int main( int argc, char *argv[] )
     {
         Window mainWindow;
         mainWindow.initialize( argc, argv );
+
         mainWindow.show();  // Never returns
     }
     catch ( const Exception &e )

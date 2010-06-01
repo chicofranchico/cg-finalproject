@@ -40,7 +40,7 @@ Stage::Stage( Scene &scene ) :
 
 	std::cout << "Loading 3D Models..." << std::endl;
 	load3DModels(  );
-	//std::cout << "Done!" << std::endl;
+	std::cout << "Done!" << std::endl;
 
 	//glDisable(GL_LIGHTING);
 
@@ -56,7 +56,8 @@ Stage::Stage( Scene &scene ) :
     e[0] = 0.0; e[1] = 0.0; e[2] = 0.0; // Point of the plane
 
     //initialize text 3d api
-    t3dInit();
+
+//    t3dInit();
 
     //soundInit = false;
 
@@ -677,7 +678,7 @@ void Stage::setupObjectTextures( )
 
 	//texture for the tree trunk
     glBindTexture(GL_TEXTURE_2D, _objTextures[0]);
-    pBytes = gltLoadTGA("textures/scratched.tga", &iWidth, &iHeight, &iComponents, &eFormat);    
+    pBytes = gltLoadTGA("../tex/scratched.tga", &iWidth, &iHeight, &iComponents, &eFormat);    
     glTexImage2D(GL_TEXTURE_2D, 0, iComponents, iWidth, iHeight, 0, eFormat, GL_UNSIGNED_BYTE, (void *)pBytes);
     free(pBytes);
     
@@ -689,7 +690,7 @@ void Stage::setupObjectTextures( )
 
 	//texture for the tree leaves
 	glBindTexture(GL_TEXTURE_2D, _objTextures[1]);
-    pBytes = gltLoadTGA("textures/grass.tga", &iWidth, &iHeight, &iComponents, &eFormat);    
+    pBytes = gltLoadTGA("../tex/grass.tga", &iWidth, &iHeight, &iComponents, &eFormat);    
     glTexImage2D(GL_TEXTURE_2D, 0, iComponents, iWidth, iHeight, 0, eFormat, GL_UNSIGNED_BYTE, (void *)pBytes);
     free(pBytes);
     
@@ -701,7 +702,7 @@ void Stage::setupObjectTextures( )
 
 	//texture for the fence
 	glBindTexture(GL_TEXTURE_2D, _objTextures[2]);
-    pBytes = gltLoadTGA("textures/marble.tga", &iWidth, &iHeight, &iComponents, &eFormat);
+    pBytes = gltLoadTGA("../tex/marble.tga", &iWidth, &iHeight, &iComponents, &eFormat);
     glTexImage2D(GL_TEXTURE_2D, 0, iComponents, iWidth, iHeight, 0, eFormat, GL_UNSIGNED_BYTE, (void *)pBytes);
     free(pBytes);
     
@@ -713,7 +714,7 @@ void Stage::setupObjectTextures( )
 
 	//another texture for the fence
 	glBindTexture(GL_TEXTURE_2D, _objTextures[3]);
-    pBytes = gltLoadTGA("textures/marble02.tga", &iWidth, &iHeight, &iComponents, &eFormat);    
+    pBytes = gltLoadTGA("../tex/marble02.tga", &iWidth, &iHeight, &iComponents, &eFormat);    
     glTexImage2D(GL_TEXTURE_2D, 0, iComponents, iWidth, iHeight, 0, eFormat, GL_UNSIGNED_BYTE, (void *)pBytes);
     free(pBytes);
     
@@ -725,7 +726,7 @@ void Stage::setupObjectTextures( )
 
 	//texture for the small plants
 	glBindTexture(GL_TEXTURE_2D, _objTextures[4]);
-    pBytes = gltLoadTGA("textures/thinleaves.tga", &iWidth, &iHeight, &iComponents, &eFormat);    
+    pBytes = gltLoadTGA("../tex/thinleaves.tga", &iWidth, &iHeight, &iComponents, &eFormat);    
     glTexImage2D(GL_TEXTURE_2D, 0, iComponents, iWidth, iHeight, 0, eFormat, GL_UNSIGNED_BYTE, (void *)pBytes);
     free(pBytes);
     
