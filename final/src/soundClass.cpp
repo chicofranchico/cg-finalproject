@@ -42,7 +42,7 @@ StageSoundClass::StageSoundClass()
 
     alGenSources(NUM_STAGE_SOURCES, srcc);
 
-    buff[START] = alutCreateBufferFromFile("wav/eveningForest.wav");
+    buff[START] = alutCreateBufferFromFile("../sound/eveningForest.wav");
     if (buff[START] == AL_NONE)
     {
       error = alutGetError ();
@@ -52,7 +52,7 @@ StageSoundClass::StageSoundClass()
       exit (EXIT_FAILURE);
     }
 
-    buff[BOOM] = alutCreateBufferFromFile("wav/boomboompow.wav");
+    buff[BOOM] = alutCreateBufferFromFile("../sound/boomboompow.wav");
     if (buff[BOOM] == AL_NONE)
     {
       error = alutGetError ();
@@ -62,7 +62,7 @@ StageSoundClass::StageSoundClass()
       exit (EXIT_FAILURE);
     }
 
-    buff[WALK] = alutCreateBufferFromFile("wav/walking.wav");
+    buff[WALK] = alutCreateBufferFromFile("../sound/walking.wav");
     if (buff[WALK] == AL_NONE)
     {
       error = alutGetError ();

@@ -89,6 +89,7 @@
  * indicate a triangle in counterclockwise order.  When specifying the 2D part
  * of the model, counterclockwise order is relative to the front face.
  */
+#include<iostream>
 
 #include <fstream>
 #include <math.h>
