@@ -141,19 +141,19 @@ void Stage::reset()
 void Stage::load3DModels()
 {
 
-	const std::string &rails 	= "models/rails.ply";
-	const std::string &monorail = "models/monorail.ply";
+	const std::string &rails 	= "../models/rails.ply";
+	const std::string &monorail = "../models/monorail.ply";
 
-	const std::string &tree  	= "models/trunk.ply";
-	const std::string &treeTop  = "models/treeTop.ply";
-	const std::string &shrub1   = "models/calathea.ply";
+	const std::string &tree  	= "../models/trunk.ply";
+	const std::string &treeTop  = "../models/treeTop.ply";
+	const std::string &shrub1   = "../models/calathea.ply";
 
-	const std::string &grass    = "models/grass.ply";
-	const std::string &tree02   = "models/tree02.ply";
+	const std::string &grass    = "../models/grass.ply";
+	const std::string &tree02   = "../models/tree02.ply";
 
-	const std::string &fence 	= "models/fence.ply";
+	const std::string &fence 	= "../models/fence.ply";
 
-	const std::string &bunny 	= "models/bunny.ply";
+	const std::string &bunny 	= "../models/bunny.ply";
 
 	_monorail = new PLYModel( _scene );
 	_monorail->loadModel( monorail );
@@ -187,21 +187,21 @@ void Stage::load3DModels()
 void Stage::loadTextures()
 {
 
-	loadImage( "textures/NewPlank.tga", texture[0] );
+	loadImage( "../tex/NewPlank.tga", texture[0] );
 
-	loadImage( "textures/brick1.tga", texture[1] );
+	loadImage( "../tex/brick1.tga", texture[1] );
 
-	loadImage( "textures/wornwood.tga", texture[2] );
+	loadImage( "../tex/wornwood.tga", texture[2] );
 
-	loadImage( "textures/sky.tga", texture[3] );
+	loadImage( "../tex/sky.tga", texture[3] );
 
-	loadImage( "textures/floor.tga", texture[4] );
+	loadImage( "../tex/floor.tga", texture[4] );
 
-	loadImage( "textures/oldroof.tga", texture[5] );
+	loadImage( "../tex/oldroof.tga", texture[5] );
 
-	loadImage( "textures/plank01.tga", texture[6] );
+	loadImage( "../tex/plank01.tga", texture[6] );
 
-	loadImage( "textures/Soupcan.tga", texture[7] );
+	loadImage( "../tex/Soupcan.tga", texture[7] );
 
 	texInit = true;
 
@@ -410,7 +410,9 @@ GLbyte* Stage::gltLoadTGA(const char *szFileName, GLint *iWidth, GLint *iHeight,
 void Stage::setupCubeWorld(  )
 {
 
-	const char *szCubeFaces[6] = { "skybox/pos_x.tga", "skybox/neg_x.tga", "skybox/pos_y.tga", "skybox/neg_y.tga", "skybox/pos_z.tga", "skybox/neg_z.tga" };
+	const char *szCubeFaces[6] = { "../skybox/pos_x.tga", "../skybox/neg_x.tga", 
+	"../skybox/pos_y.tga", "../skybox/neg_y.tga", "../skybox/pos_z.tga", 
+	"../skybox/neg_z.tga" };
 
 	GLenum  cube[6] = {  GL_TEXTURE_CUBE_MAP_POSITIVE_X,
                      GL_TEXTURE_CUBE_MAP_NEGATIVE_X,

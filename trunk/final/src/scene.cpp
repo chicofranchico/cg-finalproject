@@ -308,7 +308,7 @@ void Scene::draw()
 		_stage->stopAllSound();
 
 		//TODO: CHANGE THIS
-		system("../End/ShootingArena/AppShootingDemo");
+		system("../../../ShootingArena/AppShootingDemo");
 
 		_stage->setupSound();
 		_stage->sounder->playSound(BOOM);

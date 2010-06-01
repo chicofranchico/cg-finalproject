@@ -17,3 +17,4 @@ FreeAlut 1.x.x
 If you are running Ubuntu 9.10 or later you can get them by running
 sudo apt-get install cmake
 sudo apt-get install libalut-dev libalut0 libopenal0a libopenal1 libopenal-dev
+
