@@ -10,6 +10,10 @@
 
 #include "soundClass.hpp"
 
+#include "../End/Particle/pAPI.h"
+
+using namespace PAPI;
+
 class btBroadphaseInterface;
 class btCollisionShape;
 class btOverlappingPairCache;
@@ -21,6 +25,7 @@ class btSliderConstraint;
 class btTriangleIndexVertexArray;
 class btGImpactMeshShape;
 class btCollisionObject;
+class Application;
 
 class ShootingDemo : public GlutApplication
 {
@@ -52,6 +57,9 @@ public:
     ground,
     table
     };
+
+    ParticleContext_t P;
+    
 
     void myinit(void);
 

@@ -18,6 +18,8 @@ subject to the following restrictions:
 //glut is C code, this global gDemoApplication links glut to the C++ demo
 static Application* gApplication = 0;
 
+#include "GlutApplication.h"
+
 
 #include "GlutStuffs.h"
 
@@ -72,6 +74,8 @@ static void glutDisplayCallback(void)
 
 int glutmain(int argc, char **argv,int width,int height,const char* title,Application* App) {
     
+	int end = 0;
+
 	gApplication = App;
 
 	glutInit(&argc, argv);

@@ -308,7 +308,7 @@ void Scene::draw()
 		_stage->stopAllSound();
 
 		//TODO: CHANGE THIS
-		system("/home/chico/cg-finalproject/ShootingArena/AppShootingDemo");
+		system("../End/ShootingArena/AppShootingDemo");
 
 		_stage->setupSound();
 		_stage->sounder->playSound(BOOM);
@@ -323,7 +323,7 @@ void Scene::draw()
 		_stage->stopAllSound();
 
 		//TODO: CHANGE THIS
-		system("/home/chico/cg-finalproject/Particle221Src/Particle2/Example/example");
+		system("../End/Particle221Src/Particle2/Example/example");
 
 		_stage->setupSound();
 		_stage->sounder->playSound(BOOM);

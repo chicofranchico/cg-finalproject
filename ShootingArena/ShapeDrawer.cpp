@@ -32,9 +32,11 @@ subject to the following restrictions:
 #include "BulletCollision/CollisionShapes/btStaticPlaneShape.h"
 #include "BulletCollision/CollisionShapes/btMultiSphereShape.h"
 
-
 ///
 #include "BulletCollision/CollisionShapes/btShapeHull.h"
+
+#include "../End/Particle/pAPI.h"
+
 
 #include "LinearMath/btTransformUtil.h"
 
@@ -43,6 +45,8 @@ subject to the following restrictions:
 //for debugmodes
 
 #include <stdio.h> //printf debugging
+
+using namespace PAPI;
 
 
 void  ShapeDrawer::drawCoordSystem()  {

@@ -31,7 +31,7 @@ subject to the following restrictions:
 #include "LinearMath/btQuickprof.h"
 #include "LinearMath/btAlignedObjectArray.h"
 
-#include "/home/rahul/cg-finalproject/Particle/pAPI.h"
+#include "../End/Particle/pAPI.h"
 
 using namespace PAPI;
 
