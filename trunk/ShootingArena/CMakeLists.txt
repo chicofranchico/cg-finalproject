@@ -22,12 +22,14 @@ SET(CMAKE_C_FLAGS_RELEASE "-O3 -ffast-math -Wall")
 SET(CMAKE_CXX_FLAGS_DEBUG "-Wall")
 SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -ffast-math -Wall")
 
-SET(BULLET_PHYSICS_SOURCE_DIR ../bullet-2.76)
+SET(BULLET_PHYSICS_SOURCE_DIR ../../bullet-2.76)
 
 LINK_DIRECTORIES(${BULLET_PHYSICS_SOURCE_DIR}/src/BulletCollision
 ${BULLET_PHYSICS_SOURCE_DIR}/src/BulletDynamics
 ${BULLET_PHYSICS_SOURCE_DIR}/src/LinearMath
-${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL 
+${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL
+../End/ParticleLib
+../End/Particle
 )
 
 INCLUDE_DIRECTORIES(
@@ -37,7 +39,7 @@ ${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL
 
 LINK_LIBRARIES(
 	OpenGLSupport  
-BulletDynamics  BulletCollision LinearMath GLU glut alut
+BulletDynamics  BulletCollision LinearMath GLU glut alut Particle 
 	)
 
 ADD_EXECUTABLE(AppShootingDemo
@@ -58,6 +60,7 @@ ADD_EXECUTABLE(AppShootingDemo
 		tga.c
 		material.hpp
 		material.cpp
+		Example.cpp
 	)
 
 SET_TARGET_PROPERTIES(AppShootingDemo PROPERTIES  DEBUG_POSTFIX "_Debug")

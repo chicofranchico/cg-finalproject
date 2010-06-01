@@ -11,6 +11,7 @@
 #include <stdlib.h>
 
 
+//#include "/home/rahul/cg-finalproject/freealut-1.1.0/include/AL/alut.h"
 #include <AL/alut.h>
 #include <AL/alc.h>
 #include <AL/al.h>

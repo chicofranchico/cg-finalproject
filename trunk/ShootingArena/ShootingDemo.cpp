@@ -23,6 +23,8 @@ Based on Bullet demo suit
 
 #include "material.hpp"
 
+#include "../End/Particle/pAPI.h"
+
 static float gCollisionMargin = 0.05f;
 extern float eye[3];
 
@@ -40,6 +42,12 @@ const int gNumObjects = 400;
 const int maxNumObjects = 32760;
 
 int	shapeIndex[maxNumObjects];
+
+int flag = 0;
+
+float px = 0.0;
+float py = 4.0;
+float pz = 4.0;
 
 
 #define CUBE_HALF_EXTENTS 0.5
@@ -356,6 +364,12 @@ void ShootingDemo::clientMoveAndDisplay()
 
                 sounder.setSourcePosition(-ptB[0],ptB[1],ptB[2]);
                 sounder.playSound(BOOM);
+		
+		px = ptB[0];
+		py = ptB[1];
+		pz = ptB[2];
+		flag = 1;
+
              }
             else if (isBullet(obA))
              {

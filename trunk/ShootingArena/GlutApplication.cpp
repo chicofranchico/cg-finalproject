@@ -8,6 +8,7 @@
 #include "BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h"
 #include "BulletDynamics/Dynamics/btRigidBody.h"
 
+
 void	GlutApplication::updateModifierKeys()
 {
 	m_modifierKeys = 0;
@@ -25,6 +26,7 @@ void GlutApplication::specialKeyboard(int key, int x, int y)
 {
 	(void)x;
 	(void)y;
+	int end = 0;
 
 	switch (key) 
 	{
@@ -40,10 +42,9 @@ void GlutApplication::specialKeyboard(int key, int x, int y)
 			break;
 		}
 
-
 	case GLUT_KEY_END:
 		{
-			int numObj = getDynamicsWorld()->getNumCollisionObjects();
+			/*int numObj = getDynamicsWorld()->getNumCollisionObjects();
 			if (numObj)
 			{
 				btCollisionObject* obj = getDynamicsWorld()->getCollisionObjectArray()[numObj-1];
@@ -56,8 +57,8 @@ void GlutApplication::specialKeyboard(int key, int x, int y)
 				}
 				delete obj;
 
-
-			}
+			}*/
+			end = 1;
 			break;
 		}
 	case GLUT_KEY_LEFT : stepLeft(); break;

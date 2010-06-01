@@ -26,7 +26,7 @@
 #include "GLDebugFont.h"
 #include "ShootingDemo.h"
 
-#include "/home/rahul/cg-finalproject/Particle/pAPI.h"
+#include "../End/Particle/pAPI.h"
 
 using namespace PAPI;
 
@@ -889,11 +889,11 @@ void	Application::renderscene(int pass)
 		int particle_handle = P.GenParticleGroups(1, 1000);
 		P.CurrentGroup(particle_handle);
 
-		P.Velocity(PDSphere(pVec(px - 0.3*px, py - 0.6*py, pz-0.4*pz),1.5, 1.5));
+		P.Velocity(PDSphere(pVec(px - 0.3*px, py - 0.6*py, pz-0.35*pz),1.5, 1.5));
     
    		P.Color(PDLine(pVec(1.0f, 0.0f, 0.0f), pVec(1.0f, 1.0f, 1.0f)));
 	
-   		P.Source(1000, PDLine(pVec(px - 0.3*px, py - 0.6*py, pz-0.4*pz), pVec(px - 0.3*px, py - 0.6*py, pz-0.4*pz)));
+   		P.Source(1000, PDLine(pVec(px - 0.3*px, py - 0.6*py, pz-0.35*pz), pVec(px - 0.3*px, py - 0.6*py, pz-0.35*pz)));
 		P.Move(true, false);
 
 		size_t cnt = P.GetGroupCount();

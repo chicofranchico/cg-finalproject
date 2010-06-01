@@ -17,10 +17,14 @@ class btShapeHull;
 
 #include "BulletCollision/CollisionShapes/btShapeHull.h"
 
+#include "../End/Particle/pAPI.h"
+
 #include <map>
 #include <string>
 #include "tga.h"
 #include "material.hpp"
+
+using namespace PAPI;
 
 /// OpenGL shape drawing
 class  ShapeDrawer
@@ -52,6 +56,9 @@ public:
         std::map<int,float>	            m_texturescale;
         std::map<int,btVector3>	        m_texturerot;                
         std::map<int,Material>            m_materials;
+
+	ParticleContext_t P;
+
 		 ShapeDrawer();
 
 		virtual ~ ShapeDrawer();

@@ -21,7 +21,7 @@ subject to the following restrictions:
 
 class GlutApplication : public Application
 {
-public:
+public:        
 	
 	void specialKeyboard(int key, int x, int y);
 
