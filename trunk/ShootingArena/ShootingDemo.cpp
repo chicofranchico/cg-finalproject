@@ -646,38 +646,38 @@ void ShootingDemo::myinit(void)
 
 	glClearColor(btScalar(0.7),btScalar(0.7),btScalar(0.7),btScalar(0));
 	
-	m_shapeDrawer->m_textureFile[ball]="test.tga";
+	m_shapeDrawer->m_textureFile[ball]="../tex/test.tga";
 	m_shapeDrawer->m_texturescale[ball]=1.f;
 	Material mat;
     mat.setDiffuse(Color(1.f,1.0f,0.5f));
     m_shapeDrawer->m_materials[ball]=mat;
     
-	m_shapeDrawer->m_textureFile[roof]="test.tga";
+	m_shapeDrawer->m_textureFile[roof]="../tex/test.tga";
 	m_shapeDrawer->m_texturescale[roof]=1.f;
     m_shapeDrawer->m_materials[roof]=mat;
 
-	m_shapeDrawer->m_textureFile[wall]="woodwalltex.tga";
+	m_shapeDrawer->m_textureFile[wall]="../tex/woodwalltex.tga";
 	m_shapeDrawer->m_texturescale[wall]=0.08f;	
 	m_shapeDrawer->m_texturerot[wall]=btVector3(90,0,0);                	
     m_shapeDrawer->m_materials[wall]=mat;
 
-    m_shapeDrawer->m_textureFile[ground]="rockgroundtex.tga";    
+    m_shapeDrawer->m_textureFile[ground]="../tex/rockgroundtex.tga";    
    	m_shapeDrawer->m_texturescale[ground]=0.05f;
     m_shapeDrawer->m_materials[ground]=mat;
 
-    m_shapeDrawer->m_textureFile[can]="Soupcan.tga";
+    m_shapeDrawer->m_textureFile[can]="../tex/Soupcan.tga";
    	m_shapeDrawer->m_texturescale[can]=0.8f;    
 	m_shapeDrawer->m_texturerot[can]=btVector3(90,0,0); 
     m_shapeDrawer->m_materials[can]=mat;
 
-    m_shapeDrawer->m_textureFile[table]="test.tga";
+    m_shapeDrawer->m_textureFile[table]="../tex/test.tga";
    	m_shapeDrawer->m_texturescale[table]=0.3f;    
 	m_shapeDrawer->m_texturerot[table]=btVector3(0,0,45);                	   	
     m_shapeDrawer->m_materials[table]=mat;
 
-	m_shapeDrawer->m_textureFile[bunny]="bunnytex.tga";
+	m_shapeDrawer->m_textureFile[bunny]="../tex/bunnytex.tga";
     m_shapeDrawer->m_materials[bunny]=mat;
-   	m_shapeDrawer->m_texturescale[bunny]=0.025f;  	
+   	m_shapeDrawer->m_texturescale[bunny]=0.1f;  	
 	m_shapeDrawer->m_texturerot[bunny]=btVector3(0,0,90);                	
 	
 	//  glEnable(GL_CULL_FACE);

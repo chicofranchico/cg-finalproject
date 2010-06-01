@@ -60,7 +60,6 @@ ADD_EXECUTABLE(AppShootingDemo
 		tga.c
 		material.hpp
 		material.cpp
-		Example.cpp
 	)
 
 SET_TARGET_PROPERTIES(AppShootingDemo PROPERTIES  DEBUG_POSTFIX "_Debug")

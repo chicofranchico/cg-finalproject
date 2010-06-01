@@ -41,7 +41,7 @@ SoundClass::SoundClass()
 
     alGenSources(NUM_SOURCES, srcc);
 
-    buff[START] = alutCreateBufferFromFile("eveningForest.wav");
+    buff[START] = alutCreateBufferFromFile("../sound/eveningForest.wav");
     if (buff[START] == AL_NONE)
     {
       error = alutGetError ();
@@ -51,7 +51,7 @@ SoundClass::SoundClass()
       exit (EXIT_FAILURE);
     }    
     
-    buff[BOOM] = alutCreateBufferFromFile("boom.wav");
+    buff[BOOM] = alutCreateBufferFromFile("../sound/boom.wav");
     if (buff[BOOM] == AL_NONE)
     {
       error = alutGetError ();
@@ -72,7 +72,7 @@ SoundClass::SoundClass()
       exit (EXIT_FAILURE);
     }    
 */
-    buff[BANG] = alutCreateBufferFromFile("bang.wav");
+    buff[BANG] = alutCreateBufferFromFile("../sound/bang.wav");
     if (buff[BANG] == AL_NONE)
     {
       error = alutGetError ();
@@ -82,7 +82,7 @@ SoundClass::SoundClass()
       exit (EXIT_FAILURE);
     }    
 
-    buff[BELT] = alutCreateBufferFromFile("movingTarget.wav");
+    buff[BELT] = alutCreateBufferFromFile("../sound/movingTarget.wav");
     if (buff[BELT] == AL_NONE)
     {
       error = alutGetError ();
