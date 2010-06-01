@@ -104,7 +104,7 @@ void Scene::initialize()
 
 	// Initialize data
 	_stage = new Stage( *this );
-	
+
     // Initialize OpenGL
     glClearColor( 0.0, 0.0, 0.0, 1.0 );
     glClearDepth( 1.0 );
