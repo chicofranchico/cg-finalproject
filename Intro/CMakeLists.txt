@@ -27,8 +27,7 @@ SET(Libraries
 
 aux_source_directory(${PROJECT_SOURCE_DIR}/src Sources)
 
-ADD_EXECUTABLE( AppIntro ${Sources}
-)
+ADD_EXECUTABLE( AppIntro ${Sources} main.cpp)
 
 TARGET_LINK_LIBRARIES(AppIntro ${Libraries})
 
