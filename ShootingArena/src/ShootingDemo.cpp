@@ -23,8 +23,6 @@ Based on Bullet demo suit
 
 #include "material.hpp"
 
-#include "../End/Particle/pAPI.h"
-
 static float gCollisionMargin = 0.05f;
 extern float eye[3];
 

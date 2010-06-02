@@ -32,4 +32,5 @@ ADD_EXECUTABLE( AppIntro ${Sources}
 
 TARGET_LINK_LIBRARIES(AppIntro ${Libraries})
 
+add_library(Intro STATIC ${Sources})
 
