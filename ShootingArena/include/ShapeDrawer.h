@@ -22,7 +22,7 @@ class btShapeHull;
 #include <map>
 #include <string>
 #include "tga.h"
-#include "material.hpp"
+#include "sMaterial.hpp"
 
 using namespace PAPI;
 
@@ -55,7 +55,7 @@ public:
         std::map<int,std::string>         m_textureFile;
         std::map<int,float>	            m_texturescale;
         std::map<int,btVector3>	        m_texturerot;                
-        std::map<int,Material>            m_materials;
+        std::map<int,sMaterial>            m_materials;
 
 	ParticleContext_t P;
 

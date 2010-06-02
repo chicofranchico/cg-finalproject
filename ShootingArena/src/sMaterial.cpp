@@ -7,9 +7,9 @@
 
 
 // Class declaration include
-#include "material.hpp"
+#include "sMaterial.hpp"
 
-Material::Material() :
+sMaterial::sMaterial() :
     _ambient( Color( 0.2, 0.2, 0.2, 1.0 ) ),
     _diffuse( Color( 0.8, 0.8, 0.8, 1.0 ) ),
     _specular( Color( 0.0, 0.0, 0.0, 1.0 ) ),
@@ -18,11 +18,11 @@ Material::Material() :
 {
 }
 
-Material::~Material()
+sMaterial::~sMaterial()
 {
 }
 
-void Material::setActive( GLenum face ) const
+void sMaterial::setActive( GLenum face ) const
 {
     glMaterialfv( face, GL_AMBIENT, _ambient.array );
     glMaterialfv( face, GL_DIFFUSE, _diffuse.array );

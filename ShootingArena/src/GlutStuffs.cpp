@@ -52,6 +52,7 @@ static void glutReshapeCallback(int w, int h)
 static void glutMoveAndDisplayCallback()
 {
 	gApplication->moveAndDisplay();
+
 }
 
 static void glutMouseFuncCallback(int button, int state, int x, int y)
@@ -100,7 +101,8 @@ int glutmain(int argc, char **argv,int width,int height,const char* title,Applic
 	glutDisplayFunc( glutDisplayCallback );
 
 	glutMoveAndDisplayCallback();
-	
+
     glutMainLoop();
+ 
     return 0;
 }

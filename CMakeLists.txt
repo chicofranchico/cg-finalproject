@@ -44,17 +44,6 @@ ${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL
 #aux_source_directory(${PROJECT_SOURCE_DIR}/ShootingArena/src ArenaSources)
 SET(EndSources ${PROJECT_SOURCE_DIR}/End/End.cpp)
  
-#LINK_LIBRARIES(
-#OpenGLSupport  
-#BulletDynamics
-#BulletCollision
-#LinearMath
-#GLU
-#glut
-#alut
-#Particle 
-#)
-
 SET(Libraries
  GL
  GLU
@@ -78,8 +67,6 @@ SET(Libraries
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY build)
 
 ADD_EXECUTABLE( AppCGFinal 
-#${IntroSources}
-#${ArenaSources} 
 ${EndSources} 
 main.cpp 
 )

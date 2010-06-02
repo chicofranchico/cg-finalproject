@@ -308,7 +308,7 @@ void Application::keyboardCallback(unsigned char key, int x, int y)
 	switch (key) 
 	{
 	case 'q' : 
-		exit(0);
+	    exit(0);
 		break;
 
 	case 'l' : stepLeft(); break;
@@ -485,6 +485,9 @@ void Application::moveAndDisplay()
 		clientMoveAndDisplay();
 	else
  		displayCallback();
+ 	
+ 	if(m_exit)
+ 	 throw "Exit by user";	
 }
 
 
@@ -855,7 +858,6 @@ void	Application::renderscene(int pass)
 
 		if (!(getDebugMode()& btIDebugDraw::DBG_DrawWireframe))
 		{
-//    		printf("renderizanod pass %d\n",pass);
 			switch(pass)
 			{
 			case	0:	m_shapeDrawer->drawOpenGL(m,colObj->getCollisionShape(),
@@ -898,7 +900,7 @@ void	Application::renderscene(int pass)
 		size_t cnt = P.GetGroupCount();
    		if(cnt < 1) return;
 
-    		float *ptr;
+    	float *ptr;
     	size_t flstride, pos3Ofs, posB3Ofs, size3Ofs, vel3Ofs, velB3Ofs, color3Ofs, alpha1Ofs, age1Ofs, up3Ofs, rvel3Ofs, upB3Ofs, mass1Ofs, data1Ofs;
 
     	cnt = P.GetParticlePointer(ptr, flstride, pos3Ofs, posB3Ofs,
