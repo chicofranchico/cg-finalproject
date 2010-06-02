@@ -75,6 +75,8 @@ SET(Libraries
  Intro
 )
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY build)
+
 ADD_EXECUTABLE( AppCGFinal 
 #${IntroSources}
 #${ArenaSources} 
