@@ -17,7 +17,7 @@ class btShapeHull;
 
 #include "BulletCollision/CollisionShapes/btShapeHull.h"
 
-#include "../End/Particle/pAPI.h"
+#include "pAPI.h"
 
 #include <map>
 #include <string>

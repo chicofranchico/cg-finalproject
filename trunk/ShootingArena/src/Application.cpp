@@ -26,7 +26,6 @@
 #include "GLDebugFont.h"
 #include "ShootingDemo.h"
 
-#include "../End/Particle/pAPI.h"
 
 using namespace PAPI;
 

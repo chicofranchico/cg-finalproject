@@ -10,7 +10,7 @@
 
 #include "soundClass.hpp"
 
-#include "../End/Particle/pAPI.h"
+#include "pAPI.h"
 
 using namespace PAPI;
 

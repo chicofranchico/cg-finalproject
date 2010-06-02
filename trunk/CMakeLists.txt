@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.6)
 # 
 # Name the project
 PROJECT(AppCG2010)
+
 # Tell CMake to process the sub-directories
 add_subdirectory(Intro)
 add_subdirectory(ShootingArena)
@@ -23,21 +24,24 @@ SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -ffast-math -Wall")
 SET(BULLET_PHYSICS_SOURCE_DIR ${PROJECT_SOURCE_DIR}/bullet-2.76)
 
 
-LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/End/ParticleLib ${BULLET_PHYSICS_SOURCE_DIR}/src/BulletCollision
+LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/End/ParticleLib 
+${BULLET_PHYSICS_SOURCE_DIR}/src/BulletCollision
 ${BULLET_PHYSICS_SOURCE_DIR}/src/BulletDynamics
 ${BULLET_PHYSICS_SOURCE_DIR}/src/LinearMath
-${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL)
+${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL
+${PROJECT_SOURCE_DIR}/ShootingArena/include 
+)
 
 include_directories(${PROJECT_SOURCE_DIR}/End/Particle
 ${PROJECT_SOURCE_DIR}/End 
 ${PROJECT_SOURCE_DIR}/Intro/include
-${PROJECT_SOURCE_DIR}/ShootingArena 
+${PROJECT_SOURCE_DIR}/ShootingArena/include 
 ${BULLET_PHYSICS_SOURCE_DIR}/src 
 ${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL 
 )
 
-aux_source_directory(${PROJECT_SOURCE_DIR}/Intro/src IntroSources)
-aux_source_directory(${PROJECT_SOURCE_DIR}/ShootingArena ArenaSources)
+#aux_source_directory(${PROJECT_SOURCE_DIR}/Intro/src IntroSources)
+#aux_source_directory(${PROJECT_SOURCE_DIR}/ShootingArena/src ArenaSources)
 SET(EndSources ${PROJECT_SOURCE_DIR}/End/End.cpp)
  
 #LINK_LIBRARIES(
@@ -67,11 +71,13 @@ SET(Libraries
  BulletDynamics
  BulletCollision
  LinearMath
+ Shooting
+ Intro
 )
 
 ADD_EXECUTABLE( AppCGFinal 
-${IntroSources}
-${ArenaSources} 
+#${IntroSources}
+#${ArenaSources} 
 ${EndSources} 
 main.cpp 
 )

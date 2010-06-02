@@ -28,39 +28,31 @@ LINK_DIRECTORIES(${BULLET_PHYSICS_SOURCE_DIR}/src/BulletCollision
 ${BULLET_PHYSICS_SOURCE_DIR}/src/BulletDynamics
 ${BULLET_PHYSICS_SOURCE_DIR}/src/LinearMath
 ${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL
-../End/ParticleLib
-../End/Particle
+${PROJECT_SOURCE_DIR}/../End/ParticleLib
 )
 
-INCLUDE_DIRECTORIES(
+include_directories(
 ${BULLET_PHYSICS_SOURCE_DIR}/src 
 ${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL 
+${PROJECT_SOURCE_DIR}/include 
+${PROJECT_SOURCE_DIR}/../End/Particle
 )
 
-LINK_LIBRARIES(
-	OpenGLSupport  
-BulletDynamics  BulletCollision LinearMath GLU glut alut Particle 
-	)
+aux_source_directory(${PROJECT_SOURCE_DIR}/src Sources)
 
-ADD_EXECUTABLE(AppShootingDemo
-		main.cpp
-		ShootingDemo.cpp 
-		ShootingDemo.h
-		soundClass.hpp
-		soundClass.cpp
-		Application.h
-		Application.cpp
-		GlutApplication.h
-		GlutApplication.cpp
-		ShapeDrawer.h
-		ShapeDrawer.cpp
-		GlutStuffs.h
-		GlutStuffs.cpp
-		tga.h
-		tga.c
-		material.hpp
-		material.cpp
-	)
+LINK_LIBRARIES(
+OpenGLSupport
+BulletDynamics
+BulletCollision
+LinearMath
+GLU
+glut
+alut
+Particle 
+)
+
+ADD_EXECUTABLE(AppShootingDemo	${Sources} main.cpp)
+add_library(Shooting STATIC ${Sources})
 
 SET_TARGET_PROPERTIES(AppShootingDemo PROPERTIES  DEBUG_POSTFIX "_Debug")
 SET_TARGET_PROPERTIES(AppShootingDemo PROPERTIES  MINSIZEREL_POSTFIX "_MinsizeRel")
