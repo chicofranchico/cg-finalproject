@@ -309,7 +309,7 @@ void Scene::draw()
 		_stage->stopAllSound();
 
 		//TODO: CHANGE THIS
-		system("../../../ShootingArena/AppShootingDemo");
+		system("../ShootingArena/AppShootingDemo");
 
 		_stage->setupSound();
 		_stage->sounder->playSound(BOOM);
@@ -324,7 +324,7 @@ void Scene::draw()
 		_stage->stopAllSound();
 
 		//TODO: CHANGE THIS
-		system("../End/Particle221Src/Particle2/Example/example");
+		system("../End/AppEnd");
 
 		_stage->setupSound();
 		_stage->sounder->playSound(BOOM);
@@ -602,8 +602,6 @@ Translate camera to stage, perform the modifications only for left button so tha
 void Scene::onEvent( const MousePressEvent &event )
 {
 
-    //// EXERCISE 06 : Make the necessary updates to code here to be able to manipulate stage or scene camera.
-    // Update code here so that mouse mouvement changes the correct camera according to _cameraMode.
 	if ( event.pressed && _cameraMode == SCENE_VIEW )
 	{
 		_mouseX = event.x;
@@ -628,10 +626,7 @@ void Scene::onEvent( const MousePressEvent &event )
 			_tracking = false;
 		}
 	}
-	else if ( event.pressed && ( /*_cameraMode == GLMONITOR_VIEW || 
-							  	 _cameraMode == MANUALMONITOR_VIEW || 
-							  	 _cameraMode == DIFFMONITOR_VIEW ||*/
-							  	 _cameraMode == STAGE_VIEW ) )
+	else if ( event.pressed && ( _cameraMode == STAGE_VIEW ) )
 	{
 		_tracking = true;
 		_zooming = false;
