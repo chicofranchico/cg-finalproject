@@ -4,11 +4,11 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btAlignedAllocator.cpp" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o"
-  "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btConvexHull.cpp" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o"
-  "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btGeometryUtil.cpp" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o"
-  "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btQuickprof.cpp" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o"
-  "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btSerializer.cpp" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o"
+  "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btAlignedAllocator.cpp" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o"
+  "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btConvexHull.cpp" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o"
+  "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btGeometryUtil.cpp" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o"
+  "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btQuickprof.cpp" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o"
+  "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btSerializer.cpp" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

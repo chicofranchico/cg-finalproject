@@ -1,4 +1,4 @@
-# Install script for directory: /home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/BulletCollision
+# Install script for directory: /home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/BulletCollision
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
