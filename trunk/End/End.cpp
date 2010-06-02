@@ -1,12 +1,7 @@
-// Example.cpp - An example of the Particle System API in OpenGL.
-//
-// Copyright 1999-2006 by David K. McAllister
+// Based on Example.cpp  by David K. McAllister
+// Modified by JuanPi Carbajal carbajal@ifi.uzh.ch
 
-#include "Particle/pAPI.h"
-using namespace PAPI;
-
-#include "GL/glut.h"
-
+#include "End.hpp"
 ParticleContext_t P;
 
 // A fountain spraying up in the middle of the screen
