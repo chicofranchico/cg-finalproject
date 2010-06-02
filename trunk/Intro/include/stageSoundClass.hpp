@@ -21,10 +21,9 @@
 #define START		0
 #define WALK	    1
 #define BOOM	    2
-//#define BELT	    4
 
-#ifndef SOUNDCLASS_HPP_
-#define SOUNDCLASS_HPP_
+#ifndef STAGESOUNDCLASS_HPP_
+#define STAGESOUNDCLASS_HPP_
 
 class StageSoundClass
 {
@@ -45,7 +44,13 @@ public:
 
 	ALuint buff[NUM_STAGE_BUFFERS];
     ALuint srcc[NUM_STAGE_SOURCES];
+    
+    ALfloat sourcePosition1[];
+    ALfloat sourceVelocity1[];
 
+    ALfloat sourcePositionSTART[];
+    ALfloat listenerPosition[];
+    ALfloat listenerOrientation[];
 };
 
 #endif

@@ -25,7 +25,7 @@
 
 #include <cstdlib>
 #include <ctime>
-#include "soundClass.hpp"
+#include "stageSoundClass.hpp"
 
 
 GRAPHICSLAB_NAMESPACE_BEGIN
