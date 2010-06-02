@@ -7,6 +7,7 @@ PROJECT(AppCG2010)
 add_subdirectory(Intro)
 add_subdirectory(ShootingArena)
 add_subdirectory(End)
+add_subdirectory(bullet-2.76)
 
 SET(CMAKE_VERBOSE_MAKEFILE on)
 SET(CMAKE_CXX_COMPILER g++)
