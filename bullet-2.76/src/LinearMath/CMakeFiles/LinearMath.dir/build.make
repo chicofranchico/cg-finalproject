@@ -31,143 +31,140 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
-
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76"
+CMAKE_SOURCE_DIR = "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76"
+CMAKE_BINARY_DIR = "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject"
 
 # Include any dependencies generated for this target.
-include src/LinearMath/CMakeFiles/LinearMath.dir/depend.make
+include bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/depend.make
 
 # Include the progress variables for this target.
-include src/LinearMath/CMakeFiles/LinearMath.dir/progress.make
+include bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/progress.make
 
 # Include the compile flags for this target's objects.
-include src/LinearMath/CMakeFiles/LinearMath.dir/flags.make
+include bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/flags.make
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o: src/LinearMath/CMakeFiles/LinearMath.dir/flags.make
-src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o: src/LinearMath/btAlignedAllocator.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/CMakeFiles" $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/LinearMath.dir/btAlignedAllocator.o -c "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btAlignedAllocator.cpp"
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/flags.make
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o: bullet-2.76/src/LinearMath/btAlignedAllocator.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/CMakeFiles" $(CMAKE_PROGRESS_1)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o"
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/LinearMath.dir/btAlignedAllocator.o -c "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btAlignedAllocator.cpp"
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.i: cmake_force
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LinearMath.dir/btAlignedAllocator.i"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btAlignedAllocator.cpp" > CMakeFiles/LinearMath.dir/btAlignedAllocator.i
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btAlignedAllocator.cpp" > CMakeFiles/LinearMath.dir/btAlignedAllocator.i
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.s: cmake_force
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LinearMath.dir/btAlignedAllocator.s"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btAlignedAllocator.cpp" -o CMakeFiles/LinearMath.dir/btAlignedAllocator.s
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btAlignedAllocator.cpp" -o CMakeFiles/LinearMath.dir/btAlignedAllocator.s
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.requires:
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.requires
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.requires:
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.requires
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.provides: src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.requires
-	$(MAKE) -f src/LinearMath/CMakeFiles/LinearMath.dir/build.make src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.provides.build
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.provides
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.provides: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.requires
+	$(MAKE) -f bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/build.make bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.provides.build
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.provides
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.provides.build: src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.provides.build
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.provides.build: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.provides.build
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o: src/LinearMath/CMakeFiles/LinearMath.dir/flags.make
-src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o: src/LinearMath/btConvexHull.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/CMakeFiles" $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/LinearMath.dir/btConvexHull.o -c "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btConvexHull.cpp"
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/flags.make
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o: bullet-2.76/src/LinearMath/btConvexHull.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/CMakeFiles" $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o"
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/LinearMath.dir/btConvexHull.o -c "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btConvexHull.cpp"
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.i: cmake_force
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LinearMath.dir/btConvexHull.i"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btConvexHull.cpp" > CMakeFiles/LinearMath.dir/btConvexHull.i
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btConvexHull.cpp" > CMakeFiles/LinearMath.dir/btConvexHull.i
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.s: cmake_force
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LinearMath.dir/btConvexHull.s"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btConvexHull.cpp" -o CMakeFiles/LinearMath.dir/btConvexHull.s
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btConvexHull.cpp" -o CMakeFiles/LinearMath.dir/btConvexHull.s
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.requires:
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.requires
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.requires:
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.requires
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.provides: src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.requires
-	$(MAKE) -f src/LinearMath/CMakeFiles/LinearMath.dir/build.make src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.provides.build
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.provides
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.provides: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.requires
+	$(MAKE) -f bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/build.make bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.provides.build
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.provides
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.provides.build: src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.provides.build
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.provides.build: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.provides.build
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o: src/LinearMath/CMakeFiles/LinearMath.dir/flags.make
-src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o: src/LinearMath/btGeometryUtil.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/CMakeFiles" $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/LinearMath.dir/btGeometryUtil.o -c "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btGeometryUtil.cpp"
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/flags.make
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o: bullet-2.76/src/LinearMath/btGeometryUtil.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/CMakeFiles" $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o"
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/LinearMath.dir/btGeometryUtil.o -c "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btGeometryUtil.cpp"
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.i: cmake_force
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LinearMath.dir/btGeometryUtil.i"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btGeometryUtil.cpp" > CMakeFiles/LinearMath.dir/btGeometryUtil.i
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btGeometryUtil.cpp" > CMakeFiles/LinearMath.dir/btGeometryUtil.i
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.s: cmake_force
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LinearMath.dir/btGeometryUtil.s"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btGeometryUtil.cpp" -o CMakeFiles/LinearMath.dir/btGeometryUtil.s
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btGeometryUtil.cpp" -o CMakeFiles/LinearMath.dir/btGeometryUtil.s
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.requires:
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.requires
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.requires:
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.requires
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.provides: src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.requires
-	$(MAKE) -f src/LinearMath/CMakeFiles/LinearMath.dir/build.make src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.provides.build
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.provides
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.provides: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.requires
+	$(MAKE) -f bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/build.make bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.provides.build
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.provides
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.provides.build: src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.provides.build
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.provides.build: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.provides.build
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o: src/LinearMath/CMakeFiles/LinearMath.dir/flags.make
-src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o: src/LinearMath/btQuickprof.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/CMakeFiles" $(CMAKE_PROGRESS_4)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/LinearMath.dir/btQuickprof.o -c "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btQuickprof.cpp"
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/flags.make
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o: bullet-2.76/src/LinearMath/btQuickprof.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/CMakeFiles" $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o"
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/LinearMath.dir/btQuickprof.o -c "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btQuickprof.cpp"
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.i: cmake_force
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LinearMath.dir/btQuickprof.i"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btQuickprof.cpp" > CMakeFiles/LinearMath.dir/btQuickprof.i
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btQuickprof.cpp" > CMakeFiles/LinearMath.dir/btQuickprof.i
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.s: cmake_force
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LinearMath.dir/btQuickprof.s"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btQuickprof.cpp" -o CMakeFiles/LinearMath.dir/btQuickprof.s
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btQuickprof.cpp" -o CMakeFiles/LinearMath.dir/btQuickprof.s
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.requires:
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.requires
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.requires:
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.requires
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.provides: src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.requires
-	$(MAKE) -f src/LinearMath/CMakeFiles/LinearMath.dir/build.make src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.provides.build
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.provides
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.provides: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.requires
+	$(MAKE) -f bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/build.make bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.provides.build
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.provides
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.provides.build: src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.provides.build
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.provides.build: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.provides.build
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o: src/LinearMath/CMakeFiles/LinearMath.dir/flags.make
-src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o: src/LinearMath/btSerializer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/CMakeFiles" $(CMAKE_PROGRESS_5)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/LinearMath.dir/btSerializer.o -c "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btSerializer.cpp"
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/flags.make
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o: bullet-2.76/src/LinearMath/btSerializer.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/CMakeFiles" $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o"
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/LinearMath.dir/btSerializer.o -c "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btSerializer.cpp"
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.i: cmake_force
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LinearMath.dir/btSerializer.i"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btSerializer.cpp" > CMakeFiles/LinearMath.dir/btSerializer.i
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btSerializer.cpp" > CMakeFiles/LinearMath.dir/btSerializer.i
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.s: cmake_force
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LinearMath.dir/btSerializer.s"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/btSerializer.cpp" -o CMakeFiles/LinearMath.dir/btSerializer.s
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/btSerializer.cpp" -o CMakeFiles/LinearMath.dir/btSerializer.s
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.requires:
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.requires
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.requires:
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.requires
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.provides: src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.requires
-	$(MAKE) -f src/LinearMath/CMakeFiles/LinearMath.dir/build.make src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.provides.build
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.provides
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.provides: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.requires
+	$(MAKE) -f bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/build.make bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.provides.build
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.provides
 
-src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.provides.build: src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.provides.build
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.provides.build: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.provides.build
 
 # Object files for target LinearMath
 LinearMath_OBJECTS = \
@@ -180,33 +177,33 @@ LinearMath_OBJECTS = \
 # External object files for target LinearMath
 LinearMath_EXTERNAL_OBJECTS =
 
-src/LinearMath/libLinearMath.a: src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o
-src/LinearMath/libLinearMath.a: src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o
-src/LinearMath/libLinearMath.a: src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o
-src/LinearMath/libLinearMath.a: src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o
-src/LinearMath/libLinearMath.a: src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o
-src/LinearMath/libLinearMath.a: src/LinearMath/CMakeFiles/LinearMath.dir/build.make
-src/LinearMath/libLinearMath.a: src/LinearMath/CMakeFiles/LinearMath.dir/link.txt
+bullet-2.76/src/LinearMath/libLinearMath.a: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o
+bullet-2.76/src/LinearMath/libLinearMath.a: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o
+bullet-2.76/src/LinearMath/libLinearMath.a: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o
+bullet-2.76/src/LinearMath/libLinearMath.a: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o
+bullet-2.76/src/LinearMath/libLinearMath.a: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o
+bullet-2.76/src/LinearMath/libLinearMath.a: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/build.make
+bullet-2.76/src/LinearMath/libLinearMath.a: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library libLinearMath.a"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && $(CMAKE_COMMAND) -P CMakeFiles/LinearMath.dir/cmake_clean_target.cmake
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/LinearMath.dir/link.txt --verbose=$(VERBOSE)
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && $(CMAKE_COMMAND) -P CMakeFiles/LinearMath.dir/cmake_clean_target.cmake
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/LinearMath.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-src/LinearMath/CMakeFiles/LinearMath.dir/build: src/LinearMath/libLinearMath.a
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/build
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/build: bullet-2.76/src/LinearMath/libLinearMath.a
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/build
 
-src/LinearMath/CMakeFiles/LinearMath.dir/requires: src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.requires
-src/LinearMath/CMakeFiles/LinearMath.dir/requires: src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.requires
-src/LinearMath/CMakeFiles/LinearMath.dir/requires: src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.requires
-src/LinearMath/CMakeFiles/LinearMath.dir/requires: src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.requires
-src/LinearMath/CMakeFiles/LinearMath.dir/requires: src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.requires
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/requires
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/requires: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btAlignedAllocator.o.requires
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/requires: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btConvexHull.o.requires
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/requires: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btGeometryUtil.o.requires
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/requires: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btQuickprof.o.requires
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/requires: bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/btSerializer.o.requires
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/requires
 
-src/LinearMath/CMakeFiles/LinearMath.dir/clean:
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" && $(CMAKE_COMMAND) -P CMakeFiles/LinearMath.dir/cmake_clean.cmake
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/clean
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/clean:
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" && $(CMAKE_COMMAND) -P CMakeFiles/LinearMath.dir/cmake_clean.cmake
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/clean
 
-src/LinearMath/CMakeFiles/LinearMath.dir/depend:
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/DependInfo.cmake" --color=$(COLOR)
-.PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/depend
+bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/depend:
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/DependInfo.cmake" --color=$(COLOR)
+.PHONY : bullet-2.76/src/LinearMath/CMakeFiles/LinearMath.dir/depend
 

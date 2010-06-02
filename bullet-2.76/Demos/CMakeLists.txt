@@ -2,15 +2,7 @@
 IF (USE_GLUT)
 
 SET(SharedDemoSubdirs
-	OpenGL AllBulletDemos  ConvexDecompositionDemo Benchmarks HelloWorld
-	CcdPhysicsDemo ConstraintDemo SliderConstraintDemo GenericJointDemo Raytracer
-	RagdollDemo ForkLiftDemo BasicDemo Box2dDemo BspDemo MovingConcaveDemo VehicleDemo
-	UserCollisionAlgorithm CharacterDemo SoftDemo HeightFieldFluidDemo
-	CollisionInterfaceDemo ConcaveConvexcastDemo SimplexDemo DynamicControlDemo
-	DoublePrecisionDemo ConcaveDemo CollisionDemo
-	ContinuousConvexCollision ConcaveRaycastDemo GjkConvexCastDemo
-	MultiMaterialDemo SerializeDemo InternalEdgeDemo
-)
+	OpenGL )
 
 
 if (CMAKE_SIZEOF_VOID_P MATCHES "8")

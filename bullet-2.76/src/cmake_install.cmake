@@ -1,4 +1,4 @@
-# Install script for directory: /home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src
+# Install script for directory: /home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,11 +34,11 @@ ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/BulletMultiThreaded/cmake_install.cmake")
-  INCLUDE("/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/BulletSoftBody/cmake_install.cmake")
-  INCLUDE("/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/BulletCollision/cmake_install.cmake")
-  INCLUDE("/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/BulletDynamics/cmake_install.cmake")
-  INCLUDE("/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/src/LinearMath/cmake_install.cmake")
+  INCLUDE("/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/BulletMultiThreaded/cmake_install.cmake")
+  INCLUDE("/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/BulletSoftBody/cmake_install.cmake")
+  INCLUDE("/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/BulletCollision/cmake_install.cmake")
+  INCLUDE("/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/BulletDynamics/cmake_install.cmake")
+  INCLUDE("/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/src/LinearMath/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 

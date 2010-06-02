@@ -35,22 +35,19 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
-
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76"
+CMAKE_SOURCE_DIR = "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76"
+CMAKE_BINARY_DIR = "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject"
 
 #=============================================================================
 # Targets provided globally by CMake.
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/cmake-gui -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running interactive CMake command-line interface..."
+	/usr/bin/cmake -i .
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -69,14 +66,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76" && $(CMAKE_COMMAND) -E cmake_progress_start "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/CMakeFiles" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/Demos/CMakeFiles/progress.marks"
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76" && $(MAKE) -f CMakeFiles/Makefile2 Demos/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76/CMakeFiles" 0
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject" && $(CMAKE_COMMAND) -E cmake_progress_start "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/CMakeFiles" "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/bullet-2.76/Demos/CMakeFiles/progress.marks"
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject" && $(MAKE) -f CMakeFiles/Makefile2 bullet-2.76/Demos/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76" && $(MAKE) -f CMakeFiles/Makefile2 Demos/clean
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject" && $(MAKE) -f CMakeFiles/Makefile2 bullet-2.76/Demos/clean
 .PHONY : clean
 
 # The main clean target
@@ -85,17 +82,17 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76" && $(MAKE) -f CMakeFiles/Makefile2 Demos/preinstall
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject" && $(MAKE) -f CMakeFiles/Makefile2 bullet-2.76/Demos/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76" && $(MAKE) -f CMakeFiles/Makefile2 Demos/preinstall
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject" && $(MAKE) -f CMakeFiles/Makefile2 bullet-2.76/Demos/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76" && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject" && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Help Target
@@ -117,6 +114,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/bullet-2.76" && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd "/home/juanpi/Desktop/Computer Graphics Lab/Final Project/cg-finalproject" && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
