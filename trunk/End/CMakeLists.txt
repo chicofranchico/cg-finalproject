@@ -29,7 +29,7 @@ SET(Libraries
  Xi
  Particle
  )
-ADD_EXECUTABLE( AppEnd Example.cpp
+ADD_EXECUTABLE( AppEnd Example.cpp main.cpp
 )
 
 TARGET_LINK_LIBRARIES(AppEnd ${Libraries})
