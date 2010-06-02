@@ -10,6 +10,7 @@
 #ifndef GRAPHICSLAB_DEFS_HPP
 #define GRAPHICSLAB_DEFS_HPP
 
+
 #ifndef NULL
 #define NULL 0
 #endif

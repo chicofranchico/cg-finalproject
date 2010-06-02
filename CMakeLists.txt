@@ -36,7 +36,7 @@ ${BULLET_PHYSICS_SOURCE_DIR}/src
 ${BULLET_PHYSICS_SOURCE_DIR}/Demos/OpenGL 
 )
 
-aux_source_directory(${PROJECT_SOURCE_DIR}/src IntroSources)
+aux_source_directory(${PROJECT_SOURCE_DIR}/Intro/src IntroSources)
 aux_source_directory(${PROJECT_SOURCE_DIR}/ShootingArena ArenaSources)
 SET(EndSources ${PROJECT_SOURCE_DIR}/End/End.cpp)
  
@@ -63,17 +63,17 @@ SET(Libraries
  Xext
  Xi
  Particle
-OpenGLSupport  
-BulletDynamics
-BulletCollision
-LinearMath
+ OpenGLSupport  
+ BulletDynamics
+ BulletCollision
+ LinearMath
 )
 
-
-ADD_EXECUTABLE( AppCGFinal main.cpp 
-${IntroSources} 
-${ArenaSources}
-${EndSources}
+ADD_EXECUTABLE( AppCGFinal 
+${IntroSources}
+${ArenaSources} 
+${EndSources} 
+main.cpp 
 )
 
 TARGET_LINK_LIBRARIES(AppCGFinal ${Libraries})
