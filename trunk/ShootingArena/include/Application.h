@@ -99,6 +99,7 @@ protected:
 	bool m_singleStep;
 	bool m_idle;
 	int m_lastKey;
+	bool m_exit;
 
 	void showProfileInfo(int& xOffset,int& yStart, int yIncr);
 	void renderscene(int pass);

@@ -6,8 +6,8 @@
  */
 
 
-#ifndef GRAPHICSLAB_MATERIAL_HPP
-#define GRAPHICSLAB_MATERIAL_HPP
+#ifndef S_MATERIAL_HPP
+#define S_MATERIAL_HPP
 
 #include "GlutStuffs.h"
 
@@ -68,13 +68,13 @@ struct Color
 };  // struct Color
 
 /** Class to set up surface material */
-class Material
+class sMaterial
 {
 public:
 	/** Constructor */
-    Material();
+    sMaterial();
 	/** Destructor */
-    ~Material();
+    ~sMaterial();
     
     /**
 	 * Set the material as active
@@ -110,7 +110,7 @@ private:
 }; // class Material
 
 
-#endif  // GRAPHICSLAB_MATERIAL_HPP
+#endif  // S_MATERIAL_HPP
 
 
 

@@ -21,7 +21,7 @@ Based on Bullet demo suit
 
 #include "BunnyMesh.h"
 
-#include "material.hpp"
+#include "sMaterial.hpp"
 
 static float gCollisionMargin = 0.05f;
 extern float eye[3];
@@ -375,7 +375,6 @@ void ShootingDemo::clientMoveAndDisplay()
                    eraseSlider(moving);
 
                 eraseBullet(btRigidBody::upcast(obA));
-                printf("Boom!!\n");
              }
 
 			}
@@ -582,7 +581,7 @@ void ShootingDemo::shootBox(const btVector3& destination)
 
 	if (m_dynamicsWorld)
 	{
-		float mass = 1.f;
+		float mass = 3.f;
 		btTransform startTransform;
 		startTransform.setIdentity();
 		btVector3 camPos = getCameraPosition();
@@ -646,7 +645,7 @@ void ShootingDemo::myinit(void)
 	
 	m_shapeDrawer->m_textureFile[ball]="../tex/test.tga";
 	m_shapeDrawer->m_texturescale[ball]=1.f;
-	Material mat;
+	sMaterial mat;
     mat.setDiffuse(Color(1.f,1.0f,0.5f));
     m_shapeDrawer->m_materials[ball]=mat;
     
