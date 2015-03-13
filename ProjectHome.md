@@ -1,0 +1,1 @@
+A simple shooting arena for the CG subject at UZH 2010
